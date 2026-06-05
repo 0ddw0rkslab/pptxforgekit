@@ -27,6 +27,9 @@ _TEXT_EXTS = {".md", ".txt"}
 _DATA_EXTS = {".csv", ".xlsx"}
 _IMAGE_EXTS = {".png", ".jpg", ".jpeg"}
 
+# ~30,000 chars ≈ 7,500 tokens — keeps requests within free-tier per-minute limits
+_MAX_COMBINED_CHARS = 30_000
+
 
 class _LLMAnalysisOutput(BaseModel):
     """Intermediate model matching the LLM JSON output schema."""
@@ -78,6 +81,13 @@ class LLMContentAnalyzer(IContentAnalyzer):
                 combined_text += f.read_text(encoding="utf-8", errors="replace")
             except Exception as exc:
                 logger.warning("Could not read %s: %s", f, exc)
+        if len(combined_text) > _MAX_COMBINED_CHARS:
+            logger.warning(
+                "Document text truncated from %d to %d chars to stay within token limits",
+                len(combined_text),
+                _MAX_COMBINED_CHARS,
+            )
+            combined_text = combined_text[:_MAX_COMBINED_CHARS]
 
         llm_out = self._call_llm(combined_text) if combined_text.strip() else _LLMAnalysisOutput()
 
@@ -157,4 +167,6 @@ class LLMContentAnalyzer(IContentAnalyzer):
             user_prompt=user_prompt,
             system_prompt=ANALYZER_SYSTEM,
             model_class=_LLMAnalysisOutput,
+            rate_limit_retries=5,
+            rate_limit_backoff=15.0,
         ))
