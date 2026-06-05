@@ -5,7 +5,7 @@ from pathlib import Path
 
 import pytest
 
-from presentation_tool.models.review import ReviewIssue, ReviewReport
+from pptxforgekit.models.review import ReviewIssue, ReviewReport
 
 
 def _issue(

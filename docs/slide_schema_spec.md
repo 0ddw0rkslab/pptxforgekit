@@ -283,7 +283,7 @@ Tracks authorship and review state. Updated by each pipeline stage.
 ## Loading and Saving
 
 ```python
-from presentation_tool.models.schema import PresentationSchema
+from pptxforgekit.models.schema import PresentationSchema
 
 # Load from file
 schema = PresentationSchema.from_file("slides.json")

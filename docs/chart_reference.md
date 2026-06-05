@@ -99,7 +99,7 @@ Define data directly inside the schema — ideal for hand-crafted or fixed slide
 When you have a DataFrame and are unsure which chart type fits best:
 
 ```python
-from presentation_tool.chart.recommender import ChartTypeRecommender
+from pptxforgekit.chart.recommender import ChartTypeRecommender
 import pandas as pd
 
 df = pd.read_csv("results.csv")
@@ -124,8 +124,8 @@ Validate chart data before rendering to catch problems early:
 
 ```python
 from pathlib import Path
-from presentation_tool.chart.loader import ChartDataLoader
-from presentation_tool.chart.validator import ChartDataValidator
+from pptxforgekit.chart.loader import ChartDataLoader
+from pptxforgekit.chart.validator import ChartDataValidator
 
 loader = ChartDataLoader()
 df = loader.load(element, base_path=Path("."))
@@ -155,7 +155,7 @@ if not result.is_valid:
 When both `data_source` and `data_inline` are present, verify the inline snapshot matches the file:
 
 ```python
-from presentation_tool.chart.validator import ChartDataValidator
+from pptxforgekit.chart.validator import ChartDataValidator
 
 result = ChartDataValidator().validate_data_consistency(element, base_path=Path("."))
 if result.issues:
@@ -170,7 +170,7 @@ if result.issues:
 You can render a schema that contains only chart slides to preview chart output:
 
 ```bash
-presentation-tool render examples/schemas/sample_slides.json \
+pptxforgekit render examples/schemas/sample_slides.json \
     --theme examples/themes/default.yaml \
     --output chart_preview.pptx
 ```

@@ -57,4 +57,4 @@ The JSON schema is the single contract between all pipeline stages. It is versio
 (`schema_version`) and validated by Pydantic on read. Any stage can be run in
 isolation by loading or hand-crafting a `slides.json`.
 
-See `src/presentation_tool/models/schema.py` for the full Pydantic model definitions.
+See `src/pptxforgekit/models/schema.py` for the full Pydantic model definitions.

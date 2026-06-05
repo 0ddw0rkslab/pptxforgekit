@@ -2,10 +2,10 @@ from __future__ import annotations
 
 import pytest
 
-from presentation_tool.exceptions import PlanningError
-from presentation_tool.models.analysis import AnalysisResult, DataFileRef, Section
-from presentation_tool.models.outline import SlideOutline, StorylineOutline
-from presentation_tool.planner.storyline import RuleBasedStorylinePlanner
+from pptxforgekit.exceptions import PlanningError
+from pptxforgekit.models.analysis import AnalysisResult, DataFileRef, Section
+from pptxforgekit.models.outline import SlideOutline, StorylineOutline
+from pptxforgekit.planner.storyline import RuleBasedStorylinePlanner
 
 
 @pytest.fixture

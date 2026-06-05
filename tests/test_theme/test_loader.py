@@ -4,9 +4,9 @@ from pathlib import Path
 
 import pytest
 
-from presentation_tool.exceptions import ThemeLoadError
-from presentation_tool.models.theme import ThemeConfig
-from presentation_tool.theme.loader import ThemeLoader, default_theme_yaml
+from pptxforgekit.exceptions import ThemeLoadError
+from pptxforgekit.models.theme import ThemeConfig
+from pptxforgekit.theme.loader import ThemeLoader, default_theme_yaml
 
 
 class TestThemeLoader:

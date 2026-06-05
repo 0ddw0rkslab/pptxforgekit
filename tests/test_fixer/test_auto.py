@@ -2,10 +2,10 @@ from __future__ import annotations
 
 import pytest
 
-from presentation_tool.fixer.auto import AutoFixer
-from presentation_tool.fixer.result import FixResult
-from presentation_tool.models.review import ReviewIssue, ReviewReport
-from presentation_tool.models.schema import (
+from pptxforgekit.fixer.auto import AutoFixer
+from pptxforgekit.fixer.result import FixResult
+from pptxforgekit.models.review import ReviewIssue, ReviewReport
+from pptxforgekit.models.schema import (
     Position,
     PresentationMeta,
     PresentationSchema,

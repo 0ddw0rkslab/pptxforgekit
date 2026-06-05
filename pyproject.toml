@@ -3,7 +3,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "presentation-tool"
+name = "pptxforgekit"
 version = "0.1.0"
 description = "Pipeline-based presentation generation tool: document analysis → slide schema → PPTX"
 readme = "README.md"
@@ -62,14 +62,14 @@ llm-all = [
 ]
 
 [project.scripts]
-presentation-tool = "presentation_tool.cli:main"
+pptxforgekit = "pptxforgekit.cli:main"
 
 [project.urls]
 Homepage = "https://github.com/0ddw0rkslab/pptxforgekit"
 Issues = "https://github.com/0ddw0rkslab/pptxforgekit/issues"
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/presentation_tool"]
+packages = ["src/pptxforgekit"]
 
 [tool.ruff]
 line-length = 100
@@ -86,8 +86,8 @@ ignore_missing_imports = true
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
-addopts = "--cov=presentation_tool --cov-report=term-missing -v"
+addopts = "--cov=pptxforgekit --cov-report=term-missing -v"
 
 [tool.coverage.run]
-source = ["src/presentation_tool"]
+source = ["src/pptxforgekit"]
 omit = ["*/tests/*", "*/__init__.py"]

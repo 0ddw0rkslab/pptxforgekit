@@ -87,9 +87,9 @@ This decouples content logic from rendering and makes every stage independently 
 ## Folder Structure
 
 ```
-presentation-tool/
+pptxforgekit/
 ├── src/
-│   └── presentation_tool/
+│   └── pptxforgekit/
 │       ├── __init__.py
 │       ├── cli.py                  # Click-based CLI entry point
 │       ├── pipeline.py             # Optional: full pipeline orchestrator
@@ -338,32 +338,32 @@ class ReviewReport:
 
 ## CLI Commands
 
-All 8 commands must be implemented as Click sub-commands under `presentation-tool`.
+All 8 commands must be implemented as Click sub-commands under `pptxforgekit`.
 
 ```bash
 # 1. Create a starter theme file
-presentation-tool init-theme --output theme.yaml
+pptxforgekit init-theme --output theme.yaml
 
 # 2. Analyze input documents
-presentation-tool analyze ./input_docs --output analysis.json
+pptxforgekit analyze ./input_docs --output analysis.json
 
 # 3. Plan the storyline
-presentation-tool plan analysis.json --type research --output outline.json
+pptxforgekit plan analysis.json --type research --output outline.json
 
 # 4. Generate slide schema
-presentation-tool build-schema outline.json --theme theme.yaml --output slides.json
+pptxforgekit build-schema outline.json --theme theme.yaml --output slides.json
 
 # 5. Render PPTX from schema
-presentation-tool render slides.json --theme theme.yaml --output presentation.pptx
+pptxforgekit render slides.json --theme theme.yaml --output presentation.pptx
 
 # 6. Review the rendered PPTX
-presentation-tool review presentation.pptx slides.json --output review_report.md
+pptxforgekit review presentation.pptx slides.json --output review_report.md
 
 # 7. Auto-fix schema based on review
-presentation-tool autofix slides.json review_report.json --output slides_fixed.json
+pptxforgekit autofix slides.json review_report.json --output slides_fixed.json
 
 # 8. Re-render fixed schema
-presentation-tool render slides_fixed.json --theme theme.yaml --output presentation_fixed.pptx
+pptxforgekit render slides_fixed.json --theme theme.yaml --output presentation_fixed.pptx
 ```
 
 The `render` command must also accept a manually edited `slides.json` as input —
@@ -375,8 +375,8 @@ users can modify the schema in any text editor and re-render without re-running 
 
 ### Phase 1 — Foundation (implement first)
 
-1. All data models (`src/presentation_tool/models/`)
-2. All abstract interfaces (`src/presentation_tool/interfaces/`)
+1. All data models (`src/pptxforgekit/models/`)
+2. All abstract interfaces (`src/pptxforgekit/interfaces/`)
 3. `ThemeLoader` with YAML/JSON support
 4. `pyproject.toml` and project scaffolding
 5. `README.md` initial draft
@@ -419,7 +419,7 @@ users can modify the schema in any text editor and re-render without re-running 
   - Use `pydantic` if JSON validation / serialization is the primary use case (models, schema).
   - Use plain `dataclass` for internal-only objects.
 - **Logging**: use `logging.getLogger(__name__)` — never `print()` in library code.
-- **Exceptions**: define project-specific exception classes in `presentation_tool/exceptions.py`.
+- **Exceptions**: define project-specific exception classes in `pptxforgekit/exceptions.py`.
   Raise them with a clear message; do not swallow exceptions silently.
 - **No comments that describe what the code does.** Only comment *why* when the reason is non-obvious.
 - **One public class per file** in `theme/`, `analyzer/`, `renderer/`, etc.

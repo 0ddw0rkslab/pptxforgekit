@@ -5,7 +5,7 @@ from pathlib import Path
 import pandas as pd
 import pytest
 
-from presentation_tool.chart.recommender import ChartTypeRecommender
+from pptxforgekit.chart.recommender import ChartTypeRecommender
 
 FIXTURES = Path(__file__).parents[1] / "fixtures" / "data"
 

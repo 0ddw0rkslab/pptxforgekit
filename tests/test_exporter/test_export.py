@@ -5,10 +5,10 @@ from pathlib import Path
 
 import pytest
 
-from presentation_tool.exceptions import ExportError
-from presentation_tool.exporter.export import Exporter
-from presentation_tool.models.review import ReviewReport
-from presentation_tool.models.schema import PresentationMeta, PresentationSchema, SlideSchema
+from pptxforgekit.exceptions import ExportError
+from pptxforgekit.exporter.export import Exporter
+from pptxforgekit.models.review import ReviewReport
+from pptxforgekit.models.schema import PresentationMeta, PresentationSchema, SlideSchema
 
 
 @pytest.fixture

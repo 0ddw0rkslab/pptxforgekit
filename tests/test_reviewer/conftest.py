@@ -4,7 +4,7 @@ from pathlib import Path
 
 import pytest
 
-from presentation_tool.models.schema import (
+from pptxforgekit.models.schema import (
     ChartElement,
     ImageElement,
     Position,
@@ -13,7 +13,7 @@ from presentation_tool.models.schema import (
     TextStyle,
     ValidationMetadata,
 )
-from presentation_tool.models.theme import ThemeConfig
+from pptxforgekit.models.theme import ThemeConfig
 
 FIXTURES = Path(__file__).parents[1] / "fixtures"
 DATA_DIR = FIXTURES / "data"

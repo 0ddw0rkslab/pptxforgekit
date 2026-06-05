@@ -1,10 +1,10 @@
 # CLI Reference
 
-All commands are sub-commands of `presentation-tool`. Run any command with `--help` for full option details.
+All commands are sub-commands of `pptxforgekit`. Run any command with `--help` for full option details.
 
 ```
-presentation-tool --help
-presentation-tool <command> --help
+pptxforgekit --help
+pptxforgekit <command> --help
 ```
 
 ---
@@ -16,7 +16,7 @@ presentation-tool <command> --help
 Create a starter `theme.yaml` with default values.
 
 ```bash
-presentation-tool init-theme --output theme.yaml
+pptxforgekit init-theme --output theme.yaml
 ```
 
 | Option | Default | Description |
@@ -30,9 +30,9 @@ presentation-tool init-theme --output theme.yaml
 Parse input documents and produce `analysis.json`.
 
 ```bash
-presentation-tool analyze ./input_docs --output analysis.json
-presentation-tool analyze ./input_docs --output analysis.json --llm claude
-presentation-tool analyze paper.md     --output analysis.json --llm gpt --model gpt-4o-mini
+pptxforgekit analyze ./input_docs --output analysis.json
+pptxforgekit analyze ./input_docs --output analysis.json --llm claude
+pptxforgekit analyze paper.md     --output analysis.json --llm gpt --model gpt-4o-mini
 ```
 
 | Option | Required | Description |
@@ -51,8 +51,8 @@ Without `--llm`, a rule-based parser extracts structure. With `--llm`, text file
 Generate a storyline outline from `analysis.json`.
 
 ```bash
-presentation-tool plan analysis.json --type research --output outline.json
-presentation-tool plan analysis.json --output outline.json --llm gemini
+pptxforgekit plan analysis.json --type research --output outline.json
+pptxforgekit plan analysis.json --output outline.json --llm gemini
 ```
 
 | Option | Default | Description |
@@ -70,8 +70,8 @@ presentation-tool plan analysis.json --output outline.json --llm gemini
 Generate the slide schema JSON from `outline.json` and a theme file.
 
 ```bash
-presentation-tool build-schema outline.json --theme theme.yaml --output slides.json
-presentation-tool build-schema outline.json --theme theme.yaml --output slides.json --llm claude --model claude-opus-4-8
+pptxforgekit build-schema outline.json --theme theme.yaml --output slides.json
+pptxforgekit build-schema outline.json --theme theme.yaml --output slides.json --llm claude --model claude-opus-4-8
 ```
 
 | Option | Required | Description |
@@ -91,7 +91,7 @@ The generated `slides.json` can be edited by hand and re-rendered without re-run
 Render a slide schema into a `.pptx` file.
 
 ```bash
-presentation-tool render slides.json --theme theme.yaml --output presentation.pptx
+pptxforgekit render slides.json --theme theme.yaml --output presentation.pptx
 ```
 
 | Option | Required | Description |
@@ -109,8 +109,8 @@ presentation-tool render slides.json --theme theme.yaml --output presentation.pp
 Review a rendered PPTX against its schema and write a report.
 
 ```bash
-presentation-tool review presentation.pptx slides.json --output review_report.md
-presentation-tool review presentation.pptx slides.json --theme theme.yaml --output review_report.json
+pptxforgekit review presentation.pptx slides.json --output review_report.md
+pptxforgekit review presentation.pptx slides.json --theme theme.yaml --output review_report.json
 ```
 
 | Option | Required | Description |
@@ -127,7 +127,7 @@ presentation-tool review presentation.pptx slides.json --theme theme.yaml --outp
 Apply auto-fixable issues from a review report to the schema.
 
 ```bash
-presentation-tool autofix slides.json review_report.json --output slides_fixed.json
+pptxforgekit autofix slides.json review_report.json --output slides_fixed.json
 ```
 
 | Option | Required | Description |
@@ -143,7 +143,7 @@ presentation-tool autofix slides.json review_report.json --output slides_fixed.j
 Show all available LLM providers, their supported models, required API keys, and install commands.
 
 ```bash
-presentation-tool llm-info
+pptxforgekit llm-info
 ```
 
 ---
@@ -152,23 +152,23 @@ presentation-tool llm-info
 
 ```bash
 # 1. Theme
-presentation-tool init-theme --output theme.yaml
+pptxforgekit init-theme --output theme.yaml
 
 # 2–4. Analyze → Plan → Schema  (add --llm <provider> to any step)
-presentation-tool analyze ./input_docs   --output analysis.json
-presentation-tool plan    analysis.json  --type research --output outline.json
-presentation-tool build-schema outline.json --theme theme.yaml --output slides.json
+pptxforgekit analyze ./input_docs   --output analysis.json
+pptxforgekit plan    analysis.json  --type research --output outline.json
+pptxforgekit build-schema outline.json --theme theme.yaml --output slides.json
 
 # 5. Render
-presentation-tool render slides.json --theme theme.yaml --output presentation.pptx
+pptxforgekit render slides.json --theme theme.yaml --output presentation.pptx
 
 # 6. Review (save both formats)
-presentation-tool review presentation.pptx slides.json --output review_report.json
-presentation-tool review presentation.pptx slides.json --output review_report.md
+pptxforgekit review presentation.pptx slides.json --output review_report.json
+pptxforgekit review presentation.pptx slides.json --output review_report.md
 
 # 7. Fix + re-render
-presentation-tool autofix slides.json review_report.json --output slides_fixed.json
-presentation-tool render  slides_fixed.json --theme theme.yaml --output presentation_fixed.pptx
+pptxforgekit autofix slides.json review_report.json --output slides_fixed.json
+pptxforgekit render  slides_fixed.json --theme theme.yaml --output presentation_fixed.pptx
 ```
 
 ---
@@ -200,14 +200,14 @@ GOOGLE_API_KEY=AIza...
 
 ```bash
 # Use provider default model
-presentation-tool analyze ./docs --output analysis.json --llm claude
+pptxforgekit analyze ./docs --output analysis.json --llm claude
 
 # Specify a model explicitly
-presentation-tool analyze ./docs --output analysis.json --llm gpt --model gpt-4o-mini
-presentation-tool analyze ./docs --output analysis.json --llm ollama --model mistral
+pptxforgekit analyze ./docs --output analysis.json --llm gpt --model gpt-4o-mini
+pptxforgekit analyze ./docs --output analysis.json --llm ollama --model mistral
 ```
 
-Run `presentation-tool analyze --help` to see the full model list inline, or use `presentation-tool llm-info` for a detailed provider overview.
+Run `pptxforgekit analyze --help` to see the full model list inline, or use `pptxforgekit llm-info` for a detailed provider overview.
 
 ### Which stages support LLM?
 
@@ -223,9 +223,9 @@ Run `presentation-tool analyze --help` to see the full model list inline, or use
 You do not have to use LLM for every stage. For example, use the LLM only for analysis (the hardest extraction step) and keep plan + build-schema rule-based:
 
 ```bash
-presentation-tool analyze ./docs --output analysis.json --llm claude
-presentation-tool plan    analysis.json --output outline.json          # rule-based
-presentation-tool build-schema outline.json --theme theme.yaml --output slides.json  # rule-based
+pptxforgekit analyze ./docs --output analysis.json --llm claude
+pptxforgekit plan    analysis.json --output outline.json          # rule-based
+pptxforgekit build-schema outline.json --theme theme.yaml --output slides.json  # rule-based
 ```
 
 ---
@@ -237,7 +237,7 @@ presentation-tool build-schema outline.json --theme theme.yaml --output slides.j
 Edit `slides.json` in any text editor, then:
 
 ```bash
-presentation-tool render slides.json --theme theme.yaml --output presentation.pptx
+pptxforgekit render slides.json --theme theme.yaml --output presentation.pptx
 ```
 
 **Iterate on a single slide**
@@ -254,5 +254,5 @@ Ollama runs models locally. Install Ollama, pull a model, then:
 
 ```bash
 ollama pull mistral
-presentation-tool analyze ./docs --output analysis.json --llm ollama --model mistral
+pptxforgekit analyze ./docs --output analysis.json --llm ollama --model mistral
 ```

@@ -1,7 +1,7 @@
 # Extending with LLM Backends
 
 The pipeline has three interface points designed for LLM-backed drop-in replacements.
-Each interface lives in `src/presentation_tool/interfaces/` and uses `abc.ABC`.
+Each interface lives in `src/pptxforgekit/interfaces/` and uses `abc.ABC`.
 
 The rule-based MVP implementations can be swapped out without touching any other module.
 
@@ -75,20 +75,20 @@ llm = ["anthropic>=0.40"]
 Install with:
 
 ```bash
-pip install "presentation-tool[llm]"
+pip install "pptxforgekit[llm]"
 ```
 
 ### Step 2 — Implement the interface
 
 ```python
-# presentation_tool/analyzer/llm_analyzer.py
+# pptxforgekit/analyzer/llm_analyzer.py
 from __future__ import annotations
 
 import anthropic
 from pathlib import Path
 
-from presentation_tool.interfaces.analyzer import IContentAnalyzer
-from presentation_tool.models.analysis import AnalysisResult
+from pptxforgekit.interfaces.analyzer import IContentAnalyzer
+from pptxforgekit.models.analysis import AnalysisResult
 
 
 class LLMContentAnalyzer(IContentAnalyzer):
@@ -122,7 +122,7 @@ class LLMContentAnalyzer(IContentAnalyzer):
 
 ```python
 # Use the LLM analyzer instead of the rule-based one
-from presentation_tool.analyzer.llm_analyzer import LLMContentAnalyzer
+from pptxforgekit.analyzer.llm_analyzer import LLMContentAnalyzer
 
 analyzer = LLMContentAnalyzer()
 analysis = analyzer.analyze(Path("input_docs/"))
@@ -184,7 +184,7 @@ The cache TTL is 5 minutes; re-use the same `system` block across calls to benef
 Concrete implementations do not inherit from the interface classes. They are registered
 at construction time via duck typing. This avoids circular imports between the
 `interfaces/` package and any implementation package that might depend on models from
-`presentation_tool.models`.
+`pptxforgekit.models`.
 
 The only requirement is that the public method signature matches the abstract method.
 

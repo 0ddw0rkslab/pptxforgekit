@@ -3,11 +3,11 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-from presentation_tool.models.analysis import AnalysisResult
-from presentation_tool.models.outline import StorylineOutline
-from presentation_tool.models.schema import CURRENT_SCHEMA_VERSION, PresentationSchema
-from presentation_tool.models.theme import ThemeConfig
-from presentation_tool.schema.generator import RuleBasedSchemaGenerator
+from pptxforgekit.models.analysis import AnalysisResult
+from pptxforgekit.models.outline import StorylineOutline
+from pptxforgekit.models.schema import CURRENT_SCHEMA_VERSION, PresentationSchema
+from pptxforgekit.models.theme import ThemeConfig
+from pptxforgekit.schema.generator import RuleBasedSchemaGenerator
 
 
 class TestRuleBasedSchemaGenerator:
@@ -59,7 +59,7 @@ class TestRuleBasedSchemaGenerator:
     def test_data_slide_has_chart_element(
         self, sample_analysis: AnalysisResult, sample_theme: ThemeConfig
     ) -> None:
-        from presentation_tool.planner.storyline import RuleBasedStorylinePlanner
+        from pptxforgekit.planner.storyline import RuleBasedStorylinePlanner
         outline = RuleBasedStorylinePlanner().plan(sample_analysis, "research")
         schema = RuleBasedSchemaGenerator().generate(outline, sample_theme)
         chart_slides = [s for s in schema.slides if s.chart_elements]

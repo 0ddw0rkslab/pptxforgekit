@@ -6,9 +6,9 @@ from pathlib import Path
 import pandas as pd
 import pytest
 
-from presentation_tool.chart.loader import ChartDataLoader
-from presentation_tool.exceptions import ChartBuildError
-from presentation_tool.models.schema import ChartElement, Position
+from pptxforgekit.chart.loader import ChartDataLoader
+from pptxforgekit.exceptions import ChartBuildError
+from pptxforgekit.models.schema import ChartElement, Position
 
 FIXTURES = Path(__file__).parents[1] / "fixtures" / "data"
 

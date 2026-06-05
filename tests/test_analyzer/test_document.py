@@ -5,9 +5,9 @@ from pathlib import Path
 import pandas as pd
 import pytest
 
-from presentation_tool.analyzer.document import DocumentAnalyzer
-from presentation_tool.exceptions import AnalysisError
-from presentation_tool.models.analysis import AnalysisResult
+from pptxforgekit.analyzer.document import DocumentAnalyzer
+from pptxforgekit.exceptions import AnalysisError
+from pptxforgekit.models.analysis import AnalysisResult
 
 
 @pytest.fixture

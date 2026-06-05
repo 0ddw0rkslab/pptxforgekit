@@ -5,10 +5,10 @@ from pathlib import Path
 import pytest
 from pptx import Presentation
 
-from presentation_tool.models.outline import StorylineOutline
-from presentation_tool.models.theme import ThemeConfig
-from presentation_tool.renderer.pptx import PPTXRenderer
-from presentation_tool.schema.generator import RuleBasedSchemaGenerator
+from pptxforgekit.models.outline import StorylineOutline
+from pptxforgekit.models.theme import ThemeConfig
+from pptxforgekit.renderer.pptx import PPTXRenderer
+from pptxforgekit.schema.generator import RuleBasedSchemaGenerator
 
 
 class TestPPTXRenderer:
@@ -59,8 +59,8 @@ class TestPPTXRenderer:
         tmp_path: Path,
         fixture_csv: Path,
     ) -> None:
-        from presentation_tool.models.analysis import AnalysisResult, DataFileRef, Section
-        from presentation_tool.planner.storyline import RuleBasedStorylinePlanner
+        from pptxforgekit.models.analysis import AnalysisResult, DataFileRef, Section
+        from pptxforgekit.planner.storyline import RuleBasedStorylinePlanner
 
         analysis = AnalysisResult(
             source_files=[str(fixture_csv)],

@@ -2,9 +2,9 @@ from __future__ import annotations
 
 import pytest
 
-from presentation_tool.models.schema import TextStyle
-from presentation_tool.models.theme import ThemeConfig
-from presentation_tool.reviewer.checks.theme_check import check_theme_consistency
+from pptxforgekit.models.schema import TextStyle
+from pptxforgekit.models.theme import ThemeConfig
+from pptxforgekit.reviewer.checks.theme_check import check_theme_consistency
 from .conftest import _pos, _slide, _text
 
 

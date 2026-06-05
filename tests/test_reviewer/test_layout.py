@@ -2,8 +2,8 @@ from __future__ import annotations
 
 import pytest
 
-from presentation_tool.models.schema import Position
-from presentation_tool.reviewer.checks.layout_check import (
+from pptxforgekit.models.schema import Position
+from pptxforgekit.reviewer.checks.layout_check import (
     check_clipping,
     check_overlap,
 )

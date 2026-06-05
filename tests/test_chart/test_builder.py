@@ -6,9 +6,9 @@ import pytest
 from pptx import Presentation
 from pptx.util import Cm
 
-from presentation_tool.chart.builder import ChartBuilder
-from presentation_tool.models.schema import ChartElement, Position
-from presentation_tool.models.theme import ThemeConfig
+from pptxforgekit.chart.builder import ChartBuilder
+from pptxforgekit.models.schema import ChartElement, Position
+from pptxforgekit.models.theme import ThemeConfig
 
 FIXTURES = Path(__file__).parents[1] / "fixtures" / "data"
 

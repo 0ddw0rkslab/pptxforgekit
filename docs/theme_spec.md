@@ -18,11 +18,11 @@ Themes are loaded by `ThemeLoader` and produce a `ThemeConfig` object consumed b
 Load a theme:
 
 ```bash
-presentation-tool init-theme --output my_theme.yaml   # scaffold a starter file
+pptxforgekit init-theme --output my_theme.yaml   # scaffold a starter file
 ```
 
 ```python
-from presentation_tool.theme.loader import ThemeLoader
+from pptxforgekit.theme.loader import ThemeLoader
 theme = ThemeLoader().load("themes/default.yaml")
 ```
 

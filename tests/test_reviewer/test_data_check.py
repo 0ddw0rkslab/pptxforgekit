@@ -4,8 +4,8 @@ from pathlib import Path
 
 import pytest
 
-from presentation_tool.models.schema import ChartElement, Position
-from presentation_tool.reviewer.checks.data_check import check_data_consistency
+from pptxforgekit.models.schema import ChartElement, Position
+from pptxforgekit.reviewer.checks.data_check import check_data_consistency
 from .conftest import _chart, _pos, _slide
 
 

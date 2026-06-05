@@ -1,4 +1,4 @@
-# presentation-tool
+# pptxforgekit
 
 A pipeline-based CLI tool for generating polished PowerPoint presentations from documents.
 
@@ -32,7 +32,7 @@ Every slide is first expressed as a **slide schema** (JSON), which is the single
 
 ```bash
 git clone https://github.com/0ddw0rkslab/pptxforgekit
-cd presentation-tool
+cd pptxforgekit
 pip install -e .
 ```
 
@@ -63,24 +63,24 @@ cp .env.example .env
 
 ```bash
 # 1. Create a starter theme
-presentation-tool init-theme --output theme.yaml
+pptxforgekit init-theme --output theme.yaml
 
 # 2. Analyze documents and generate a PPTX in one pipeline
-presentation-tool analyze ./input_docs   --output analysis.json
-presentation-tool plan    analysis.json  --type research --output outline.json
-presentation-tool build-schema outline.json --theme theme.yaml --output slides.json
-presentation-tool render  slides.json   --theme theme.yaml --output presentation.pptx
+pptxforgekit analyze ./input_docs   --output analysis.json
+pptxforgekit plan    analysis.json  --type research --output outline.json
+pptxforgekit build-schema outline.json --theme theme.yaml --output slides.json
+pptxforgekit render  slides.json   --theme theme.yaml --output presentation.pptx
 ```
 
 With an LLM for richer content:
 
 ```bash
-presentation-tool analyze ./input_docs  --output analysis.json --llm claude
-presentation-tool plan    analysis.json --output outline.json  --llm claude
-presentation-tool build-schema outline.json --theme theme.yaml --output slides.json --llm claude
+pptxforgekit analyze ./input_docs  --output analysis.json --llm claude
+pptxforgekit plan    analysis.json --output outline.json  --llm claude
+pptxforgekit build-schema outline.json --theme theme.yaml --output slides.json --llm claude
 
 # list all providers and their models
-presentation-tool llm-info
+pptxforgekit llm-info
 ```
 
 You can also manually edit `slides.json` and re-run `render` — no need to re-run the full pipeline.

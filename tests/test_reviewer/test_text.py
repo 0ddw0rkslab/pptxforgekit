@@ -2,9 +2,9 @@ from __future__ import annotations
 
 import pytest
 
-from presentation_tool.models.schema import Position, TextStyle
-from presentation_tool.models.theme import ThemeConfig
-from presentation_tool.reviewer.checks.text_check import (
+from pptxforgekit.models.schema import Position, TextStyle
+from pptxforgekit.models.theme import ThemeConfig
+from pptxforgekit.reviewer.checks.text_check import (
     check_font_size,
     check_text_density,
     check_text_overflow,

@@ -4,9 +4,9 @@ from pathlib import Path
 
 import pytest
 
-from presentation_tool.models.analysis import AnalysisResult, DataFileRef, Section
-from presentation_tool.models.outline import SlideOutline, StorylineOutline
-from presentation_tool.models.theme import ThemeConfig
+from pptxforgekit.models.analysis import AnalysisResult, DataFileRef, Section
+from pptxforgekit.models.outline import SlideOutline, StorylineOutline
+from pptxforgekit.models.theme import ThemeConfig
 
 FIXTURES = Path(__file__).parent / "fixtures"
 
@@ -66,5 +66,5 @@ def sample_analysis() -> AnalysisResult:
 
 @pytest.fixture
 def sample_outline(sample_analysis: AnalysisResult) -> StorylineOutline:
-    from presentation_tool.planner.storyline import RuleBasedStorylinePlanner
+    from pptxforgekit.planner.storyline import RuleBasedStorylinePlanner
     return RuleBasedStorylinePlanner().plan(sample_analysis, "research")

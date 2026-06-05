@@ -6,7 +6,7 @@ from pathlib import Path
 import pytest
 from pydantic import ValidationError
 
-from presentation_tool.models.schema import (
+from pptxforgekit.models.schema import (
     CURRENT_SCHEMA_VERSION,
     ChartElement,
     ImageElement,

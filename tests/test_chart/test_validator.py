@@ -5,8 +5,8 @@ from pathlib import Path
 import pandas as pd
 import pytest
 
-from presentation_tool.chart.validator import ChartDataValidator
-from presentation_tool.models.schema import ChartElement, Position
+from pptxforgekit.chart.validator import ChartDataValidator
+from pptxforgekit.models.schema import ChartElement, Position
 
 FIXTURES = Path(__file__).parents[1] / "fixtures" / "data"
 
