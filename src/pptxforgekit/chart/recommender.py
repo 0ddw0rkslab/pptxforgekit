@@ -74,8 +74,10 @@ class ChartTypeRecommender:
                     ),
                 )
 
-        # ── categorical X ─────────────────────────────────────────────────────
-        if pd.api.types.is_object_dtype(x_series) or pd.api.types.is_categorical_dtype(x_series):
+        # ── categorical X (string / object / categorical dtype) ──────────────
+        # Use negative check to avoid relying on deprecated is_categorical_dtype
+        # (removed in pandas 3.0) and to handle StringDtype in pandas 2.x+.
+        if not pd.api.types.is_numeric_dtype(x_series) and not pd.api.types.is_datetime64_any_dtype(x_series):
             # Pie: 1 y column, few slices, non-negative, looks like proportions
             if len(y_cols) == 1 and y_cols[0] in df.columns:
                 y_series = df[y_cols[0]]
