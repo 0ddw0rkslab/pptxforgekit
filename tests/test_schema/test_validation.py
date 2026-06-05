@@ -9,7 +9,6 @@ from pydantic import ValidationError
 from pptxforgekit.models.schema import (
     CURRENT_SCHEMA_VERSION,
     ChartElement,
-    ImageElement,
     Position,
     PresentationMeta,
     PresentationSchema,

@@ -4,7 +4,7 @@ import pytest
 
 from pptxforgekit.exceptions import PlanningError
 from pptxforgekit.models.analysis import AnalysisResult, DataFileRef, Section
-from pptxforgekit.models.outline import SlideOutline, StorylineOutline
+from pptxforgekit.models.outline import StorylineOutline
 from pptxforgekit.planner.storyline import RuleBasedStorylinePlanner
 
 

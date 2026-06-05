@@ -5,7 +5,7 @@ from pathlib import Path
 import pytest
 
 from pptxforgekit.models.analysis import AnalysisResult, DataFileRef, Section
-from pptxforgekit.models.outline import SlideOutline, StorylineOutline
+from pptxforgekit.models.outline import StorylineOutline
 from pptxforgekit.models.theme import ThemeConfig
 
 FIXTURES = Path(__file__).parent / "fixtures"

@@ -1,9 +1,8 @@
 from __future__ import annotations
 
-import pytest
-
 from pptxforgekit.models.schema import ChartElement, Position
 from pptxforgekit.reviewer.checks.chart_check import check_chart_labels
+
 from .conftest import _chart, _pos, _slide
 
 

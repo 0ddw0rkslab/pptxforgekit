@@ -1,16 +1,14 @@
 from __future__ import annotations
 
-import pytest
-
-from pptxforgekit.models.schema import Position, TextStyle
+from pptxforgekit.models.schema import Position
 from pptxforgekit.models.theme import ThemeConfig
 from pptxforgekit.reviewer.checks.text_check import (
     check_font_size,
     check_text_density,
     check_text_overflow,
 )
-from .conftest import _pos, _slide, _text
 
+from .conftest import _slide, _text
 
 # ────────────────────────── minimum font size ─────────────────────────────────
 

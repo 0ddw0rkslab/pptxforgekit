@@ -13,12 +13,12 @@ from pptxforgekit.models.analysis import (
 )
 
 from .csv_parser import parse_csv
-from .xlsx_parser import parse_xlsx
 from .markdown_parser import (
     extract_conclusions,
     extract_key_messages,
     parse_markdown,
 )
+from .xlsx_parser import parse_xlsx
 
 logger = logging.getLogger(__name__)
 
@@ -131,7 +131,7 @@ class DocumentAnalyzer(IContentAnalyzer):
         from .markdown_parser import Section as _Section
         lines = path.read_text(encoding="utf-8").splitlines()
         title = lines[0].strip() if lines else path.stem
-        body = " ".join(l.strip() for l in lines[1:] if l.strip())
+        body = " ".join(ln.strip() for ln in lines[1:] if ln.strip())
         sec = _Section(heading=title, paragraphs=[body] if body else [])
         return title, body[:300], [sec]
 

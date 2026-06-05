@@ -1,11 +1,9 @@
 from __future__ import annotations
 
-import pytest
-
-from pptxforgekit.models.schema import TextStyle
 from pptxforgekit.models.theme import ThemeConfig
 from pptxforgekit.reviewer.checks.theme_check import check_theme_consistency
-from .conftest import _pos, _slide, _text
+
+from .conftest import _slide, _text
 
 
 class TestColorConsistency:
@@ -44,10 +42,6 @@ class TestFontSizeConsistency:
         slide = _slide(
             text_elements=[_text("t1", role="title", font_size=expected)]
         )
-        font_issues = [
-            i for i in check_theme_consistency(slide, default_theme)
-            if "pt" in i.message.lower() and "size" not in i.message.lower()
-        ]
         # Should have no font-size-deviation issues
         size_dev_issues = [
             i for i in check_theme_consistency(slide, default_theme)

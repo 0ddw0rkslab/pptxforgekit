@@ -3,7 +3,6 @@ from __future__ import annotations
 from pathlib import Path
 
 import pandas as pd
-import pytest
 
 from pptxforgekit.chart.validator import ChartDataValidator
 from pptxforgekit.models.schema import ChartElement, Position

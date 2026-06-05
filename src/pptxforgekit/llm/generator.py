@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import logging
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from typing import Any
 
 from pydantic import BaseModel, Field
@@ -106,7 +106,7 @@ class LLMSchemaGenerator(ISlideSchemaGenerator):
             model_class=_LLMGeneratorOutput,
         )
 
-        now = datetime.now(timezone.utc).isoformat()
+        now = datetime.now(UTC).isoformat()
         slides = [
             self._build_slide(llm_slide, outline_slide, theme, now, i)
             for i, (llm_slide, outline_slide) in enumerate(

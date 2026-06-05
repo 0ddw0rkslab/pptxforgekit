@@ -142,8 +142,8 @@ class ReviewReport(BaseModel):
         lines: list[str] = [
             "# Review Report",
             "",
-            f"| Field | Value |",
-            f"|---|---|",
+            "| Field | Value |",
+            "|---|---|",
             f"| **PPTX** | `{self.pptx_file}` |",
             f"| **Schema** | `{self.schema_file}` |",
             f"| **Reviewed at** | {self.reviewed_at} |",
@@ -200,7 +200,7 @@ class ReviewReport(BaseModel):
             if issue.suggested_fix:
                 lines.append(f"- **Suggested fix**: {issue.suggested_fix}")
             if issue.auto_fixable:
-                lines.append(f"- **Auto-fixable**: yes")
+                lines.append("- **Auto-fixable**: yes")
             lines.append("")
 
         return "\n".join(lines)

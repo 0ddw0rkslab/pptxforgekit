@@ -1,14 +1,12 @@
 from __future__ import annotations
 
-import pytest
-
 from pptxforgekit.models.schema import Position
 from pptxforgekit.reviewer.checks.layout_check import (
     check_clipping,
     check_overlap,
 )
-from .conftest import _pos, _slide, _text, _chart
 
+from .conftest import _chart, _pos, _slide, _text
 
 # ─────────────────────────────── overlap ─────────────────────────────────────
 

@@ -6,7 +6,6 @@ import pytest
 
 from pptxforgekit.models.schema import (
     ChartElement,
-    ImageElement,
     Position,
     SlideSchema,
     TextElement,

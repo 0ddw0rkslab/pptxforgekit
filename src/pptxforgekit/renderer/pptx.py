@@ -120,10 +120,10 @@ class PPTXRenderer:
 
     def _add_text(self, slide: object, elem: TextElement) -> None:
         p = elem.position
-        txBox = slide.shapes.add_textbox(  # type: ignore[union-attr]
+        tx_box = slide.shapes.add_textbox(  # type: ignore[union-attr]
             Cm(p.x), Cm(p.y), Cm(p.w), Cm(p.h)
         )
-        tf = txBox.text_frame
+        tf = tx_box.text_frame
         tf.word_wrap = True
 
         style = elem.style

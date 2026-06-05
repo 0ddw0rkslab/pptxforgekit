@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from pptxforgekit.models.review import ReviewIssue, Severity
-from pptxforgekit.models.schema import SlideSchema, TextElement
+from pptxforgekit.models.schema import SlideSchema
 from pptxforgekit.models.theme import ThemeConfig
 
 # Typography constants (shared with fixer/ops.py)
@@ -143,7 +143,7 @@ def check_text_density(slide: SlideSchema, theme: ThemeConfig) -> list[ReviewIss
             continue
 
         lines = elem.content.splitlines()
-        bullet_lines = [l for l in lines if l.strip().startswith(("•", "-", "*", "–"))]
+        bullet_lines = [ln for ln in lines if ln.strip().startswith(("•", "-", "*", "–"))]
         word_count = len(elem.content.split())
 
         if len(bullet_lines) > max_bullets:

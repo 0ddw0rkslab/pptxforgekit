@@ -154,8 +154,8 @@ def plan(
 
     Add --llm <provider> to let an LLM craft the narrative arc.
     """
-    from pptxforgekit.models.analysis import AnalysisResult
     from pptxforgekit.exceptions import PlanningError
+    from pptxforgekit.models.analysis import AnalysisResult
 
     analysis = AnalysisResult.model_validate_json(
         Path(analysis_json).read_text(encoding="utf-8")
@@ -205,9 +205,9 @@ def build_schema(
 
     Add --llm <provider> to let an LLM fill in the slide content.
     """
+    from pptxforgekit.exceptions import SchemaGenerationError, ThemeLoadError
     from pptxforgekit.models.outline import StorylineOutline
     from pptxforgekit.theme.loader import ThemeLoader
-    from pptxforgekit.exceptions import SchemaGenerationError, ThemeLoadError
 
     try:
         theme = ThemeLoader().load(Path(theme_file))
@@ -252,10 +252,10 @@ def build_schema(
 @click.option("--output", "-o", required=True, help="Output path for .pptx file")
 def render(schema_json: str, theme_file: str, output: str) -> None:
     """Render a slide schema JSON into a .pptx file."""
+    from pptxforgekit.exceptions import RenderError, ThemeLoadError
     from pptxforgekit.models.schema import PresentationSchema
     from pptxforgekit.renderer.pptx import PPTXRenderer
     from pptxforgekit.theme.loader import ThemeLoader
-    from pptxforgekit.exceptions import RenderError, ThemeLoadError
 
     try:
         theme = ThemeLoader().load(Path(theme_file))
@@ -288,9 +288,9 @@ def render(schema_json: str, theme_file: str, output: str) -> None:
 def review(pptx_file: str, schema_json: str, theme_file: str | None, output: str) -> None:
     """Review a rendered PPTX against its schema and write a report."""
     from pptxforgekit.models.schema import PresentationSchema
+    from pptxforgekit.models.theme import ThemeConfig
     from pptxforgekit.reviewer.slide import SlideReviewer
     from pptxforgekit.theme.loader import ThemeLoader
-    from pptxforgekit.models.theme import ThemeConfig
 
     schema = PresentationSchema.from_file(schema_json)
     theme: ThemeConfig
@@ -364,7 +364,7 @@ def autofix(schema_json: str, review_json: str, output: str) -> None:
 @main.command("llm-info")
 def llm_info() -> None:
     """Show available LLM providers and their supported models."""
-    from pptxforgekit.llm.registry import PROVIDER_NAMES, DEFAULT_MODELS
+    from pptxforgekit.llm.registry import DEFAULT_MODELS, PROVIDER_NAMES
 
     click.echo("Available LLM providers\n")
     provider_models: dict[str, list[str]] = {

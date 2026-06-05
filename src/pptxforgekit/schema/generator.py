@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import logging
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 
 from pptxforgekit.interfaces.generator import ISlideSchemaGenerator
 from pptxforgekit.models.outline import SlideOutline, StorylineOutline
@@ -23,7 +23,7 @@ logger = logging.getLogger(__name__)
 
 
 def _now_iso() -> str:
-    return datetime.now(timezone.utc).isoformat()
+    return datetime.now(UTC).isoformat()
 
 
 class RuleBasedSchemaGenerator(ISlideSchemaGenerator):

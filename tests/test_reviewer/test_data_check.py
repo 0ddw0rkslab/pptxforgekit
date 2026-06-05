@@ -2,10 +2,9 @@ from __future__ import annotations
 
 from pathlib import Path
 
-import pytest
-
-from pptxforgekit.models.schema import ChartElement, Position
+from pptxforgekit.models.schema import ChartElement
 from pptxforgekit.reviewer.checks.data_check import check_data_consistency
+
 from .conftest import _chart, _pos, _slide
 
 

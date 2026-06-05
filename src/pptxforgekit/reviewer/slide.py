@@ -1,10 +1,10 @@
 from __future__ import annotations
 
 import logging
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 
-from pptxforgekit.models.review import ReviewIssue, ReviewReport, SEVERITY_ORDER
+from pptxforgekit.models.review import SEVERITY_ORDER, ReviewIssue, ReviewReport
 from pptxforgekit.models.schema import PresentationSchema, SlideSchema
 from pptxforgekit.models.theme import ThemeConfig
 
@@ -72,7 +72,7 @@ class SlideReviewer:
         report = ReviewReport(
             pptx_file=str(pptx_path),
             schema_file=str(schema_path),
-            reviewed_at=datetime.now(timezone.utc).isoformat(),
+            reviewed_at=datetime.now(UTC).isoformat(),
             issues=all_issues,
         )
 

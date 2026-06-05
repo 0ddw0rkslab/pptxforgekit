@@ -2,7 +2,6 @@ from __future__ import annotations
 
 from pathlib import Path
 
-import pytest
 from pptx import Presentation
 
 from pptxforgekit.models.outline import StorylineOutline
@@ -59,7 +58,7 @@ class TestPPTXRenderer:
         tmp_path: Path,
         fixture_csv: Path,
     ) -> None:
-        from pptxforgekit.models.analysis import AnalysisResult, DataFileRef, Section
+        from pptxforgekit.models.analysis import AnalysisResult, DataFileRef
         from pptxforgekit.planner.storyline import RuleBasedStorylinePlanner
 
         analysis = AnalysisResult(

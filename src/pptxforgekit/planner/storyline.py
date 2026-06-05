@@ -111,7 +111,7 @@ class RuleBasedStorylinePlanner(IStorylinePlanner):
                     extra = SlideOutline(
                         slide_id=f"s{slide_counter:03d}",
                         section="results",
-                        title=f"Results — {data_file.file_path.split('/')[-1].split('\\')[-1]}",
+                        title="Results — " + data_file.file_path.replace("\\", "/").split("/")[-1],
                         key_message="",
                         suggested_layout="title_chart",
                         data_refs=[data_file.file_path],

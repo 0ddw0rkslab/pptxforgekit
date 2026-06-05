@@ -1,13 +1,12 @@
 from __future__ import annotations
 
-import json
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
 from pydantic import BaseModel, Field, computed_field
 
-from pptxforgekit.models.review import ReviewIssue, SEVERITY_ORDER
+from pptxforgekit.models.review import SEVERITY_ORDER, ReviewIssue
 from pptxforgekit.models.schema import PresentationSchema
 
 
@@ -45,7 +44,7 @@ class FixResult(BaseModel):
     source_schema_file: str
     source_report_file: str
     fixed_at: str = Field(
-        default_factory=lambda: datetime.now(timezone.utc).isoformat()
+        default_factory=lambda: datetime.now(UTC).isoformat()
     )
     fixed_schema: PresentationSchema
     applied_fixes: list[AppliedFix] = Field(default_factory=list)

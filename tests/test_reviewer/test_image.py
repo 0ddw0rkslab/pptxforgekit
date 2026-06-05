@@ -2,10 +2,9 @@ from __future__ import annotations
 
 from pathlib import Path
 
-import pytest
-
 from pptxforgekit.models.schema import ImageElement, Position
 from pptxforgekit.reviewer.checks.image_check import check_image_resolution
+
 from .conftest import _pos, _slide
 
 

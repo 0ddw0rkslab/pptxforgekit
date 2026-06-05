@@ -3,8 +3,6 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-import pytest
-
 from pptxforgekit.models.review import ReviewIssue, ReviewReport
 
 

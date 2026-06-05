@@ -47,8 +47,6 @@ class ChartTypeRecommender:
 
         x_series = df[x_col]
         n_categories = x_series.nunique()
-        x_dtype = x_series.dtype
-
         # ── datetime / time-series ────────────────────────────────────────────
         if pd.api.types.is_datetime64_any_dtype(x_series) or self._looks_like_epoch(x_series):
             return ChartRecommendation(

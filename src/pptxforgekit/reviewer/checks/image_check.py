@@ -4,7 +4,7 @@ import logging
 from pathlib import Path
 
 from pptxforgekit.models.review import ReviewIssue, Severity
-from pptxforgekit.models.schema import ImageElement, SlideSchema
+from pptxforgekit.models.schema import SlideSchema
 
 logger = logging.getLogger(__name__)
 

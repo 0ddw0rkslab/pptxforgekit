@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import json
 import re
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any, Literal
 
@@ -328,11 +328,11 @@ class ValidationMetadata(BaseModel):
     """
 
     created_at: str = Field(
-        default_factory=lambda: datetime.now(timezone.utc).isoformat(),
+        default_factory=lambda: datetime.now(UTC).isoformat(),
         description="ISO 8601 creation timestamp (auto-set by generator)",
     )
     last_modified: str = Field(
-        default_factory=lambda: datetime.now(timezone.utc).isoformat(),
+        default_factory=lambda: datetime.now(UTC).isoformat(),
         description="ISO 8601 last-modified timestamp (updated on every save)",
     )
     schema_version: str = Field(
@@ -466,7 +466,7 @@ class PresentationMeta(BaseModel):
     theme_file: str = ""
     total_slides: int = Field(..., ge=0)
     generated_at: str = Field(
-        default_factory=lambda: datetime.now(timezone.utc).isoformat()
+        default_factory=lambda: datetime.now(UTC).isoformat()
     )
     author: str | None = None
     description: str = ""

@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from pptxforgekit.models.review import ReviewIssue, Severity
-from pptxforgekit.models.schema import ChartElement, SlideSchema
+from pptxforgekit.models.schema import SlideSchema
 
 # Thresholds
 _MAX_SERIES_BAR  = 5
@@ -21,8 +21,6 @@ def check_chart_labels(slide: SlideSchema) -> list[ReviewIssue]:
     seq = 0
 
     for elem in slide.chart_elements:
-        seq_start = seq
-
         # ── chart title ───────────────────────────────────────────────────────
         if not elem.title.strip():
             seq += 1
