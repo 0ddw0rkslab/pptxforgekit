@@ -3,6 +3,8 @@ from __future__ import annotations
 import logging
 import os
 
+from typing import Any
+
 from pptxforgekit.exceptions import LLMProviderNotInstalledError
 from pptxforgekit.llm.provider import LLMProvider
 
@@ -61,7 +63,7 @@ class GeminiProvider(LLMProvider):
         system_prompt: str = "",
         json_mode: bool = False,
     ) -> str:
-        gen_config_kwargs: dict = {}
+        gen_config_kwargs: dict[str, Any] = {}
         if json_mode:
             gen_config_kwargs["response_mime_type"] = "application/json"
 
@@ -80,4 +82,4 @@ class GeminiProvider(LLMProvider):
             getattr(response.usage_metadata, "prompt_token_count", "n/a"),
             getattr(response.usage_metadata, "candidates_token_count", "n/a"),
         )
-        return response.text
+        return str(response.text)

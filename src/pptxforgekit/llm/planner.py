@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import logging
+from typing import cast
 
 from pydantic import BaseModel, Field
 
@@ -62,11 +63,11 @@ class LLMStorylinePlanner(IStorylinePlanner):
             self._provider.model,
         )
 
-        llm_out: _LLMOutlineOutput = self._provider.complete_json(
+        llm_out = cast(_LLMOutlineOutput, self._provider.complete_json(
             user_prompt=user_prompt,
             system_prompt=PLANNER_SYSTEM,
             model_class=_LLMOutlineOutput,
-        )
+        ))
 
         slides = self._coerce_slides(llm_out.slides)
 

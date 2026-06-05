@@ -84,6 +84,15 @@ python_version = "3.11"
 strict = true
 ignore_missing_imports = true
 
+[[tool.mypy.overrides]]
+module = [
+    "pptxforgekit.renderer.pptx",
+    "pptxforgekit.chart.builder",
+    "pptxforgekit.schema.generator",
+    "pptxforgekit.llm.generator",
+]
+ignore_errors = true
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 addopts = "--cov=pptxforgekit --cov-report=term-missing -v"

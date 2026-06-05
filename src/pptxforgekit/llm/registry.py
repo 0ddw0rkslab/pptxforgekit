@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from typing import Any
+
 from pptxforgekit.exceptions import LLMError
 from pptxforgekit.llm.provider import LLMProvider
 
@@ -22,7 +24,7 @@ KNOWN_MODELS: dict[str, list[str]] = {
 }
 
 
-def build_provider(provider: str, model: str | None = None, **kwargs) -> LLMProvider:
+def build_provider(provider: str, model: str | None = None, **kwargs: Any) -> LLMProvider:
     """Instantiate an LLMProvider by name.
 
     Args:

@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import logging
 from pathlib import Path
+from typing import Any, cast
 
 from pydantic import BaseModel, Field
 
@@ -32,9 +33,9 @@ class _LLMAnalysisOutput(BaseModel):
     title: str = ""
     abstract: str = ""
     key_messages: list[str] = Field(default_factory=list)
-    sections: list[dict] = Field(default_factory=list)
+    sections: list[dict[str, Any]] = Field(default_factory=list)
     conclusions: list[str] = Field(default_factory=list)
-    metadata: dict = Field(default_factory=dict)
+    metadata: dict[str, Any] = Field(default_factory=dict)
 
 
 class LLMContentAnalyzer(IContentAnalyzer):
@@ -152,8 +153,8 @@ class LLMContentAnalyzer(IContentAnalyzer):
             self._provider.provider_name,
             self._provider.model,
         )
-        return self._provider.complete_json(
+        return cast(_LLMAnalysisOutput, self._provider.complete_json(
             user_prompt=user_prompt,
             system_prompt=ANALYZER_SYSTEM,
             model_class=_LLMAnalysisOutput,
-        )
+        ))

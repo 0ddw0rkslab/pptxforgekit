@@ -3,6 +3,8 @@ from __future__ import annotations
 import logging
 import os
 
+from typing import Any
+
 from pptxforgekit.exceptions import LLMProviderNotInstalledError
 from pptxforgekit.llm.provider import LLMProvider
 
@@ -55,7 +57,7 @@ class ClaudeProvider(LLMProvider):
         system_prompt: str = "",
         json_mode: bool = False,
     ) -> str:
-        system: list[dict] = []
+        system: list[dict[str, Any]] = []
         if system_prompt:
             system = [
                 {
@@ -78,4 +80,4 @@ class ClaudeProvider(LLMProvider):
             usage.output_tokens,
             getattr(usage, "cache_read_input_tokens", "n/a"),
         )
-        return response.content[0].text
+        return str(response.content[0].text)

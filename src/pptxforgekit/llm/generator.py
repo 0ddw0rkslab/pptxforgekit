@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import logging
 from datetime import UTC, datetime
-from typing import Any
+from typing import Any, cast
 
 from pydantic import BaseModel, Field
 
@@ -100,11 +100,11 @@ class LLMSchemaGenerator(ISlideSchemaGenerator):
             outline.total_slides,
         )
 
-        llm_out: _LLMGeneratorOutput = self._provider.complete_json(
+        llm_out = cast(_LLMGeneratorOutput, self._provider.complete_json(
             user_prompt=user_prompt,
             system_prompt=GENERATOR_SYSTEM,
             model_class=_LLMGeneratorOutput,
-        )
+        ))
 
         now = datetime.now(UTC).isoformat()
         slides = [

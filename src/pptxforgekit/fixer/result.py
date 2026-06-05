@@ -53,12 +53,12 @@ class FixResult(BaseModel):
 
     # ── computed ──────────────────────────────────────────────────────────────
 
-    @computed_field  # type: ignore[misc]
+    @computed_field  # type: ignore[prop-decorator]
     @property
     def n_fixed(self) -> int:
         return len(self.applied_fixes)
 
-    @computed_field  # type: ignore[misc]
+    @computed_field  # type: ignore[prop-decorator]
     @property
     def n_remaining(self) -> int:
         return len(self.remaining_issues)

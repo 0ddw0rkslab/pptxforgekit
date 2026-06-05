@@ -80,7 +80,7 @@ class TextElement(BaseModel):
         ..., min_length=1, description="Text content; use \\n for line breaks"
     )
     position: Position
-    style: TextStyle = Field(default_factory=TextStyle)
+    style: TextStyle = Field(default_factory=TextStyle)  # type: ignore[arg-type]
     z_index: int = Field(0, ge=0, description="Rendering order; higher = on top")
 
 
@@ -427,7 +427,7 @@ class SlideSchema(BaseModel):
     table_elements: list[TableElement] = Field(default_factory=list)
     speaker_note: str = Field("", description="Speaker notes shown in presenter view")
     validation_metadata: ValidationMetadata = Field(
-        default_factory=ValidationMetadata
+        default_factory=ValidationMetadata  # type: ignore[arg-type]
     )
 
     @field_validator("background_color", mode="before")

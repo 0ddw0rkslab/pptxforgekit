@@ -3,7 +3,7 @@ from __future__ import annotations
 import json
 import logging
 from pathlib import Path
-from typing import Any
+from typing import Any, cast
 
 import yaml
 
@@ -38,9 +38,9 @@ class ThemeLoader:
         text = path.read_text(encoding="utf-8")
         if suffix in (".yaml", ".yml"):
             data = yaml.safe_load(text)
-            return data if isinstance(data, dict) else {}
+            return cast(dict[str, Any], data) if isinstance(data, dict) else {}
         if suffix == ".json":
-            return json.loads(text)
+            return cast(dict[str, Any], json.loads(text))
         raise ThemeLoadError(f"Unsupported theme format '{suffix}'. Use .yaml or .json.")
 
     def _parse(self, raw: dict[str, Any], source: str) -> ThemeConfig:

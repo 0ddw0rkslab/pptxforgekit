@@ -9,6 +9,7 @@ from pptxforgekit.models.analysis import (
     AnalysisResult,
     DataFileRef,
     FigureCandidate,
+    Section,
     TableCandidate,
 )
 
@@ -44,7 +45,7 @@ class DocumentAnalyzer(IContentAnalyzer):
         title = directory.name
         abstract = ""
         key_messages: list[str] = []
-        sections = []
+        sections: list[Section] = []
         tables: list[TableCandidate] = []
         figures: list[FigureCandidate] = []
         data_files: list[DataFileRef] = []
@@ -127,12 +128,11 @@ class DocumentAnalyzer(IContentAnalyzer):
             )
         raise AnalysisError(f"Cannot analyze standalone image: {path}")
 
-    def _parse_txt(self, path: Path) -> tuple[str, str, list]:
-        from .markdown_parser import Section as _Section
+    def _parse_txt(self, path: Path) -> tuple[str, str, list[Section]]:
         lines = path.read_text(encoding="utf-8").splitlines()
         title = lines[0].strip() if lines else path.stem
         body = " ".join(ln.strip() for ln in lines[1:] if ln.strip())
-        sec = _Section(heading=title, paragraphs=[body] if body else [])
+        sec = Section(heading=title, paragraphs=[body] if body else [])
         return title, body[:300], [sec]
 
     def _probe_image(self, path: Path) -> FigureCandidate:

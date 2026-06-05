@@ -89,12 +89,12 @@ class ReviewReport(BaseModel):
 
     # ── computed aggregates ───────────────────────────────────────────────────
 
-    @computed_field  # type: ignore[misc]
+    @computed_field  # type: ignore[prop-decorator]
     @property
     def total_issues(self) -> int:
         return len(self.issues)
 
-    @computed_field  # type: ignore[misc]
+    @computed_field  # type: ignore[prop-decorator]
     @property
     def summary(self) -> dict[str, int]:
         counts: dict[str, int] = {"low": 0, "medium": 0, "high": 0, "critical": 0}
@@ -102,7 +102,7 @@ class ReviewReport(BaseModel):
             counts[issue.severity] += 1
         return counts
 
-    @computed_field  # type: ignore[misc]
+    @computed_field  # type: ignore[prop-decorator]
     @property
     def by_type(self) -> dict[str, int]:
         counts: dict[str, int] = defaultdict(int)
@@ -110,7 +110,7 @@ class ReviewReport(BaseModel):
             counts[issue.issue_type] += 1
         return dict(counts)
 
-    @computed_field  # type: ignore[misc]
+    @computed_field  # type: ignore[prop-decorator]
     @property
     def by_slide(self) -> dict[str, int]:
         counts: dict[str, int] = defaultdict(int)

@@ -5,7 +5,7 @@ from typing import Any
 
 from pptxforgekit.exceptions import PlanningError
 from pptxforgekit.interfaces.planner import IStorylinePlanner
-from pptxforgekit.models.analysis import AnalysisResult
+from pptxforgekit.models.analysis import AnalysisResult, Section
 from pptxforgekit.models.outline import SlideOutline, StorylineOutline
 
 logger = logging.getLogger(__name__)
@@ -188,7 +188,7 @@ class RuleBasedStorylinePlanner(IStorylinePlanner):
             data_refs=data_refs,
         )
 
-    def _find_sections(self, analysis: AnalysisResult, keywords: list[str]):
+    def _find_sections(self, analysis: AnalysisResult, keywords: list[str]) -> list[Section]:
         matched = []
         for sec in analysis.sections:
             heading_lower = sec.heading.lower()

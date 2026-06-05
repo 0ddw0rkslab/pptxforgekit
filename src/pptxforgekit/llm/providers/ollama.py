@@ -3,6 +3,8 @@ from __future__ import annotations
 import logging
 import os
 
+from typing import Any
+
 from pptxforgekit.exceptions import LLMProviderNotInstalledError
 from pptxforgekit.llm.provider import LLMProvider
 
@@ -72,12 +74,12 @@ class OllamaProvider(LLMProvider):
         system_prompt: str = "",
         json_mode: bool = False,
     ) -> str:
-        messages: list[dict] = []
+        messages: list[dict[str, Any]] = []
         if system_prompt:
             messages.append({"role": "system", "content": system_prompt})
         messages.append({"role": "user", "content": user_prompt})
 
-        kwargs: dict = {"model": self._model, "messages": messages}
+        kwargs: dict[str, Any] = {"model": self._model, "messages": messages}
         if json_mode:
             kwargs["response_format"] = {"type": "json_object"}
 

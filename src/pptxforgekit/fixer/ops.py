@@ -192,7 +192,7 @@ def fix_minimum_font_size(
 
 def fix_text_overflow(
     elem: TextElement,
-    context: dict,
+    context: dict[str, Any],
     min_font_size: int,
     slide_h: float = SLIDE_H,
 ) -> AppliedFix | None:
@@ -206,7 +206,7 @@ def fix_text_overflow(
     p = elem.position
     fs = elem.style.font_size
     content = elem.content
-    before: dict = {"x": p.x, "y": p.y, "w": p.w, "h": p.h, "font_size": fs}
+    before: dict[str, Any] = {"x": p.x, "y": p.y, "w": p.w, "h": p.h, "font_size": fs}
 
     estimated = context.get("estimated_lines", _estimate_lines(content, p.w, fs))
 
@@ -349,7 +349,7 @@ def _split_at_words(lines: list[str], target_words: int) -> int:
     return max(1, len(lines) // 2)
 
 
-def _position_diff(before: dict, after: dict) -> str:
+def _position_diff(before: dict[str, Any], after: dict[str, Any]) -> str:
     changes = []
     for key in ("x", "y", "w", "h"):
         b, a = before.get(key, "?"), after.get(key, "?")

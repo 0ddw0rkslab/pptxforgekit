@@ -3,7 +3,7 @@ from __future__ import annotations
 import logging
 
 from pptxforgekit.fixer import ops
-from pptxforgekit.fixer.result import AppliedFix, FixResult
+from pptxforgekit.fixer.result import AppliedFix, FixResult, SplitSuggestion
 from pptxforgekit.models.review import ReviewIssue, ReviewReport
 from pptxforgekit.models.schema import PresentationSchema, SlideSchema
 
@@ -31,7 +31,6 @@ class AutoFixer:
 
         applied: list[AppliedFix] = []
         still_remaining: list[ReviewIssue] = list(unfixable)
-        from pptxforgekit.fixer.result import SplitSuggestion
         split_suggestions: list[SplitSuggestion] = []
 
         min_font_size = 12
@@ -72,7 +71,7 @@ class AutoFixer:
         slide: SlideSchema,
         issue: ReviewIssue,
         min_font_size: int,
-        split_suggestions: list,
+        split_suggestions: list[SplitSuggestion],
     ) -> AppliedFix | None:
         itype = issue.issue_type
 

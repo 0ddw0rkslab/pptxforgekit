@@ -146,4 +146,4 @@ class ChartTypeRecommender:
     def _looks_like_proportions(self, series: pd.Series) -> bool:
         """True if the numeric series looks like percentages summing ~100."""
         total = series.sum()
-        return 90.0 <= total <= 110.0
+        return bool(90.0 <= total <= 110.0)

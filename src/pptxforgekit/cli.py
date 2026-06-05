@@ -3,10 +3,12 @@ from __future__ import annotations
 import logging
 import sys
 from pathlib import Path
+from typing import NoReturn
 
 import click
 
 from pptxforgekit import __version__
+from pptxforgekit.llm.provider import LLMProvider
 
 logging.basicConfig(
     level=logging.INFO,
@@ -47,7 +49,7 @@ _MODEL_OPTION = click.option(
 )
 
 
-def _load_provider(llm_provider: str | None, llm_model: str | None):
+def _load_provider(llm_provider: str | None, llm_model: str | None) -> LLMProvider | None:
     """Return an LLMProvider if --llm is specified, else None."""
     if llm_provider is None:
         return None
@@ -64,7 +66,7 @@ def _load_provider(llm_provider: str | None, llm_model: str | None):
         _fail(str(exc))
 
 
-def _fail(msg: str) -> None:
+def _fail(msg: str) -> NoReturn:
     click.echo(f"Error: {msg}", err=True)
     sys.exit(1)
 
@@ -107,10 +109,12 @@ def analyze(input_path: str, output: str, llm_provider: str | None, llm_model: s
     Add --llm <provider> to use an LLM for richer extraction.
     """
     from pptxforgekit.exceptions import AnalysisError
+    from pptxforgekit.interfaces.analyzer import IContentAnalyzer
 
     provider = _load_provider(llm_provider, llm_model)
 
     try:
+        analyzer: IContentAnalyzer
         if provider is not None:
             from pptxforgekit.llm.analyzer import LLMContentAnalyzer
             analyzer = LLMContentAnalyzer(provider)
@@ -155,6 +159,7 @@ def plan(
     Add --llm <provider> to let an LLM craft the narrative arc.
     """
     from pptxforgekit.exceptions import PlanningError
+    from pptxforgekit.interfaces.planner import IStorylinePlanner
     from pptxforgekit.models.analysis import AnalysisResult
 
     analysis = AnalysisResult.model_validate_json(
@@ -164,6 +169,7 @@ def plan(
     provider = _load_provider(llm_provider, llm_model)
 
     try:
+        planner: IStorylinePlanner
         if provider is not None:
             from pptxforgekit.llm.planner import LLMStorylinePlanner
             planner = LLMStorylinePlanner(provider)
@@ -206,6 +212,7 @@ def build_schema(
     Add --llm <provider> to let an LLM fill in the slide content.
     """
     from pptxforgekit.exceptions import SchemaGenerationError, ThemeLoadError
+    from pptxforgekit.interfaces.generator import ISlideSchemaGenerator
     from pptxforgekit.models.outline import StorylineOutline
     from pptxforgekit.theme.loader import ThemeLoader
 
@@ -222,6 +229,7 @@ def build_schema(
     provider = _load_provider(llm_provider, llm_model)
 
     try:
+        generator: ISlideSchemaGenerator
         if provider is not None:
             from pptxforgekit.llm.generator import LLMSchemaGenerator
             generator = LLMSchemaGenerator(provider)
