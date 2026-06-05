@@ -1,0 +1,147 @@
+{
+  "schema_version": "1.1",
+  "presentation": {
+    "title": "Optimizer Benchmark Results",
+    "presentation_type": "research",
+    "theme_file": "",
+    "total_slides": 2,
+    "generated_at": "2026-06-04T00:00:00Z",
+    "author": "Jane Researcher",
+    "description": "Sample showing native PowerPoint chart slides with inline data"
+  },
+  "slides": [
+    {
+      "slide_id": "s001",
+      "slide_number": 1,
+      "section": "results",
+      "title": "CIFAR-10 Accuracy by Optimizer",
+      "key_message": "Adam-Warmup achieves the highest accuracy with the fewest training steps.",
+      "layout_type": "title_chart",
+      "background_color": null,
+      "footer_override": null,
+      "text_elements": [
+        {
+          "element_id": "s001_title",
+          "role": "title",
+          "content": "CIFAR-10 Accuracy by Optimizer",
+          "position": { "x": 2.0, "y": 0.5, "w": 29.87, "h": 2.0 },
+          "style": {
+            "font_size": 28,
+            "bold": true,
+            "color": "#1F3864",
+            "align": "left"
+          },
+          "z_index": 0
+        }
+      ],
+      "chart_elements": [
+        {
+          "element_id": "s001_bar_chart",
+          "chart_type": "bar",
+          "data_source": "",
+          "x_column": "method",
+          "y_columns": ["cifar10_accuracy"],
+          "title": "CIFAR-10 Test Accuracy (%)",
+          "x_label": "Optimizer",
+          "y_label": "Accuracy (%)",
+          "legend_position": "none",
+          "position": { "x": 3.0, "y": 3.2, "w": 27.87, "h": 14.3 },
+          "data_inline": [
+            { "method": "Adam-Warmup", "cifar10_accuracy": 94.2 },
+            { "method": "Adam",        "cifar10_accuracy": 93.1 },
+            { "method": "SGD+Mom.",    "cifar10_accuracy": 93.8 },
+            { "method": "RMSProp",     "cifar10_accuracy": 92.4 },
+            { "method": "AdaGrad",     "cifar10_accuracy": 91.7 }
+          ],
+          "z_index": 1
+        }
+      ],
+      "image_elements": [],
+      "table_elements": [],
+      "speaker_note": "Key message: Adam-Warmup achieves the highest accuracy with the fewest training steps.\n\nNote: All results averaged over 5 random seeds. Error bars available in supplementary material.",
+      "validation_metadata": {
+        "created_at": "2026-06-04T00:00:00Z",
+        "last_modified": "2026-06-04T00:00:00Z",
+        "schema_version": "1.1",
+        "status": "draft",
+        "slide_version": 1,
+        "author": "Jane Researcher",
+        "is_locked": false,
+        "reviewer_flags": []
+      }
+    },
+    {
+      "slide_id": "s002",
+      "slide_number": 2,
+      "section": "results",
+      "title": "Convergence Speed Comparison",
+      "key_message": "Adam-Warmup converges 35% faster than SGD while maintaining accuracy.",
+      "layout_type": "title_chart",
+      "background_color": null,
+      "footer_override": null,
+      "text_elements": [
+        {
+          "element_id": "s002_title",
+          "role": "title",
+          "content": "Convergence Speed Comparison",
+          "position": { "x": 2.0, "y": 0.5, "w": 29.87, "h": 2.0 },
+          "style": {
+            "font_size": 28,
+            "bold": true,
+            "color": "#1F3864",
+            "align": "left"
+          },
+          "z_index": 0
+        },
+        {
+          "element_id": "s002_key_msg",
+          "role": "label",
+          "content": "★ Adam-Warmup reaches 93% accuracy in 12,000 steps vs. 22,000 for SGD",
+          "position": { "x": 2.0, "y": 16.8, "w": 29.87, "h": 0.9 },
+          "style": {
+            "font_size": 14,
+            "bold": true,
+            "color": "#ED7D31",
+            "align": "center"
+          },
+          "z_index": 2
+        }
+      ],
+      "chart_elements": [
+        {
+          "element_id": "s002_line_chart",
+          "chart_type": "line",
+          "data_source": "",
+          "x_column": "method",
+          "y_columns": ["convergence_steps"],
+          "title": "Steps to 93% Accuracy",
+          "x_label": "Optimizer",
+          "y_label": "Training Steps",
+          "legend_position": "none",
+          "position": { "x": 3.0, "y": 3.0, "w": 27.87, "h": 13.0 },
+          "data_inline": [
+            { "method": "Adam-Warmup", "convergence_steps": 12000 },
+            { "method": "Adam",        "convergence_steps": 18500 },
+            { "method": "SGD+Mom.",    "convergence_steps": 22000 },
+            { "method": "RMSProp",     "convergence_steps": 21000 },
+            { "method": "AdaGrad",     "convergence_steps": 25000 }
+          ],
+          "z_index": 1
+        }
+      ],
+      "image_elements": [],
+      "table_elements": [],
+      "speaker_note": "Key message: Adam-Warmup converges 35% faster than SGD while maintaining accuracy.\n\nThe warmup phase prevents the large initial gradient updates that cause slow recovery in later epochs.",
+      "validation_metadata": {
+        "created_at": "2026-06-04T00:00:00Z",
+        "last_modified": "2026-06-04T00:00:00Z",
+        "schema_version": "1.1",
+        "status": "draft",
+        "slide_version": 1,
+        "author": "Jane Researcher",
+        "is_locked": false,
+        "reviewer_flags": []
+      }
+    }
+  ]
+}

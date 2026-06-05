@@ -1,0 +1,49 @@
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+.venv/
+venv/
+env/
+.env
+
+# Test / coverage
+.pytest_cache/
+.coverage
+htmlcov/
+.mypy_cache/
+.ruff_cache/
+
+# Generated outputs (do not commit)
+out/
+*.pptx
+*.pdf
+analysis.json
+outline.json
+slides.json
+slides_fixed.json
+review_report.json
+review_report.md
+
+# Temporary / personal working files
+temp-*.md
+interim_report_*.md
+
+# Claude Code session files
+.claude/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db

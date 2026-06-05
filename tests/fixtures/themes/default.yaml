@@ -1,0 +1,45 @@
+name: test_theme
+
+colors:
+  primary: "#1F3864"
+  secondary: "#2F75B6"
+  accent: "#ED7D31"
+  background: "#FFFFFF"
+  text: "#000000"
+  text_light: "#595959"
+
+fonts:
+  title_font: Calibri
+  body_font: Calibri
+  title_size: 36
+  heading_size: 28
+  body_size: 20
+  caption_size: 14
+  min_size: 12
+
+margins:
+  top: 1.5
+  bottom: 1.5
+  left: 2.0
+  right: 2.0
+
+footer:
+  show_page_number: true
+  show_date: false
+  custom_text: ""
+
+chart_style:
+  preferred_type: bar
+  color_sequence:
+    - "#2F75B6"
+    - "#ED7D31"
+  show_legend: true
+  show_data_labels: false
+
+rules:
+  - rule_type: max_bullets
+    value: 6
+  - rule_type: min_font_size
+    value: 12
+  - rule_type: max_text_chars
+    value: 400

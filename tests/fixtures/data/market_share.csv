@@ -1,0 +1,5 @@
+framework,market_share_pct
+PyTorch,62.3
+TensorFlow,28.1
+JAX,5.4
+Others,4.2

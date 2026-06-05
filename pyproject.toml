@@ -1,0 +1,93 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "presentation-tool"
+version = "0.1.0"
+description = "Pipeline-based presentation generation tool: document analysis → slide schema → PPTX"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "Contributors" }]
+keywords = ["presentation", "pptx", "powerpoint", "automation", "slide"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Science/Research",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Office/Business :: Office Suites",
+]
+dependencies = [
+    "python-pptx>=0.6.23",
+    "pydantic>=2.0",
+    "click>=8.1",
+    "pyyaml>=6.0",
+    "openpyxl>=3.1",
+    "pandas>=2.0",
+    "Pillow>=10.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4",
+    "pytest-cov>=4.1",
+    "ruff>=0.1",
+    "mypy>=1.5",
+]
+# LLM provider extras — install only the one(s) you need
+llm-claude = [
+    "anthropic>=0.40",
+    "python-dotenv>=1.0",
+]
+llm-openai = [
+    "openai>=1.0",
+    "python-dotenv>=1.0",
+]
+llm-gemini = [
+    "google-generativeai>=0.8",
+    "python-dotenv>=1.0",
+]
+llm-ollama = [
+    "openai>=1.0",          # Ollama reuses the OpenAI SDK via localhost
+    "python-dotenv>=1.0",
+]
+llm-all = [
+    "anthropic>=0.40",
+    "openai>=1.0",
+    "google-generativeai>=0.8",
+    "python-dotenv>=1.0",
+]
+
+[project.scripts]
+presentation-tool = "presentation_tool.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/0ddw0rkslab/pptxforgekit"
+Issues = "https://github.com/0ddw0rkslab/pptxforgekit/issues"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/presentation_tool"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "W", "UP"]
+ignore = ["E501"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--cov=presentation_tool --cov-report=term-missing -v"
+
+[tool.coverage.run]
+source = ["src/presentation_tool"]
+omit = ["*/tests/*", "*/__init__.py"]

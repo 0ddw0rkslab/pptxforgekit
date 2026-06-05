@@ -1,0 +1,4 @@
+method,accuracy,f1_score
+Baseline,0.82,0.80
+Ours,0.91,0.89
+Ours+Finetune,0.93,0.92

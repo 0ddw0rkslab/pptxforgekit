@@ -1,0 +1,196 @@
+{
+  "schema_version": "1.1",
+  "presentation": {
+    "title": "Sample Research Presentation",
+    "presentation_type": "research",
+    "theme_file": "themes/default.yaml",
+    "total_slides": 3,
+    "generated_at": "2026-06-01T00:00:00Z",
+    "author": null,
+    "description": "Fixture used in tests"
+  },
+  "slides": [
+    {
+      "slide_id": "s001",
+      "slide_number": 1,
+      "section": "cover",
+      "title": "Sample Research Paper",
+      "key_message": "We present a new approach to problem X.",
+      "layout_type": "cover",
+      "background_color": null,
+      "footer_override": null,
+      "text_elements": [
+        {
+          "element_id": "s001_title",
+          "role": "title",
+          "content": "Sample Research Paper",
+          "position": {"x": 2.0, "y": 6.5, "w": 29.87, "h": 4.0},
+          "style": {
+            "font_size": 36,
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "color": "#1F3864",
+            "align": "left"
+          },
+          "z_index": 0
+        },
+        {
+          "element_id": "s001_subtitle",
+          "role": "subtitle",
+          "content": "We present a new approach to problem X.",
+          "position": {"x": 2.0, "y": 11.5, "w": 29.87, "h": 2.5},
+          "style": {
+            "font_size": 20,
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "color": "#595959",
+            "align": "left"
+          },
+          "z_index": 0
+        }
+      ],
+      "chart_elements": [],
+      "image_elements": [],
+      "table_elements": [],
+      "speaker_note": "Welcome the audience and introduce the paper.",
+      "validation_metadata": {
+        "created_at": "2026-06-01T00:00:00Z",
+        "last_modified": "2026-06-01T00:00:00Z",
+        "schema_version": "1.1",
+        "status": "draft",
+        "slide_version": 1,
+        "author": null,
+        "is_locked": false,
+        "reviewer_flags": []
+      }
+    },
+    {
+      "slide_id": "s002",
+      "slide_number": 2,
+      "section": "background",
+      "title": "Background",
+      "key_message": "Prior approaches fail on dataset Y.",
+      "layout_type": "title_content",
+      "background_color": null,
+      "footer_override": null,
+      "text_elements": [
+        {
+          "element_id": "s002_title",
+          "role": "title",
+          "content": "Background",
+          "position": {"x": 2.0, "y": 0.5, "w": 29.87, "h": 2.0},
+          "style": {
+            "font_size": 28,
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "color": "#1F3864",
+            "align": "left"
+          },
+          "z_index": 0
+        },
+        {
+          "element_id": "s002_body",
+          "role": "body",
+          "content": "• Prior methods rely on hand-crafted features\n• Dataset Y exposes failure modes\n• Our approach addresses the root cause",
+          "position": {"x": 2.0, "y": 3.2, "w": 29.87, "h": 14.35},
+          "style": {
+            "font_size": 20,
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "color": "#000000",
+            "align": "left"
+          },
+          "z_index": 0
+        }
+      ],
+      "chart_elements": [],
+      "image_elements": [],
+      "table_elements": [],
+      "speaker_note": "Key point: prior work fails because of X.",
+      "validation_metadata": {
+        "created_at": "2026-06-01T00:00:00Z",
+        "last_modified": "2026-06-01T00:00:00Z",
+        "schema_version": "1.1",
+        "status": "draft",
+        "slide_version": 1,
+        "author": null,
+        "is_locked": false,
+        "reviewer_flags": []
+      }
+    },
+    {
+      "slide_id": "s003",
+      "slide_number": 3,
+      "section": "results",
+      "title": "Results",
+      "key_message": "Our method outperforms the baseline by 9 pp.",
+      "layout_type": "title_chart",
+      "background_color": null,
+      "footer_override": null,
+      "text_elements": [
+        {
+          "element_id": "s003_title",
+          "role": "title",
+          "content": "Results",
+          "position": {"x": 2.0, "y": 0.5, "w": 29.87, "h": 2.0},
+          "style": {
+            "font_size": 28,
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "color": "#1F3864",
+            "align": "left"
+          },
+          "z_index": 0
+        }
+      ],
+      "chart_elements": [
+        {
+          "element_id": "s003_chart",
+          "chart_type": "bar",
+          "data_source": "",
+          "data_inline": [
+            {"method": "Baseline", "accuracy": 0.82},
+            {"method": "Ours", "accuracy": 0.91},
+            {"method": "Ours+FT", "accuracy": 0.93}
+          ],
+          "x_column": "method",
+          "y_columns": ["accuracy"],
+          "title": "Accuracy by Method",
+          "x_label": "Method",
+          "y_label": "Accuracy",
+          "y_unit": "(%)",
+          "value_min": null,
+          "value_max": null,
+          "number_format": "0.0%",
+          "series_names": [],
+          "series_colors": [],
+          "show_data_labels": true,
+          "data_label_format": "0.0%",
+          "stacked": false,
+          "bar_direction": "vertical",
+          "legend_position": "none",
+          "position": {"x": 2.5, "y": 3.2, "w": 29.37, "h": 14.35},
+          "z_index": 0
+        }
+      ],
+      "image_elements": [],
+      "table_elements": [],
+      "speaker_note": "Highlight the 9 pp gain over baseline.",
+      "validation_metadata": {
+        "created_at": "2026-06-01T00:00:00Z",
+        "last_modified": "2026-06-01T00:00:00Z",
+        "schema_version": "1.1",
+        "status": "draft",
+        "slide_version": 1,
+        "author": null,
+        "is_locked": false,
+        "reviewer_flags": []
+      }
+    }
+  ]
+}

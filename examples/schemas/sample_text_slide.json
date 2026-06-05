@@ -1,0 +1,136 @@
+{
+  "schema_version": "1.1",
+  "presentation": {
+    "title": "Introduction to Deep Learning",
+    "presentation_type": "research",
+    "theme_file": "",
+    "total_slides": 2,
+    "generated_at": "2026-06-04T00:00:00Z",
+    "author": "Jane Researcher",
+    "description": "Sample showing a text-heavy research slide"
+  },
+  "slides": [
+    {
+      "slide_id": "s001",
+      "slide_number": 1,
+      "section": "cover",
+      "title": "Introduction to Deep Learning",
+      "key_message": "Deep learning has fundamentally transformed AI research.",
+      "layout_type": "cover",
+      "background_color": null,
+      "footer_override": null,
+      "text_elements": [
+        {
+          "element_id": "s001_title",
+          "role": "title",
+          "content": "Introduction to Deep Learning",
+          "position": { "x": 2.0, "y": 6.5, "w": 29.87, "h": 4.0 },
+          "style": {
+            "font_size": 36,
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "color": "#1F3864",
+            "align": "center"
+          },
+          "z_index": 0
+        },
+        {
+          "element_id": "s001_subtitle",
+          "role": "subtitle",
+          "content": "Research Presentation — June 2026",
+          "position": { "x": 2.0, "y": 11.5, "w": 29.87, "h": 2.5 },
+          "style": {
+            "font_size": 20,
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "color": "#595959",
+            "align": "center"
+          },
+          "z_index": 1
+        }
+      ],
+      "chart_elements": [],
+      "image_elements": [],
+      "table_elements": [],
+      "speaker_note": "Welcome everyone. This talk covers the key contributions of our work on adaptive learning rates.",
+      "validation_metadata": {
+        "created_at": "2026-06-04T00:00:00Z",
+        "last_modified": "2026-06-04T00:00:00Z",
+        "schema_version": "1.1",
+        "status": "approved",
+        "slide_version": 1,
+        "author": "Jane Researcher",
+        "is_locked": true,
+        "reviewer_flags": []
+      }
+    },
+    {
+      "slide_id": "s002",
+      "slide_number": 2,
+      "section": "background",
+      "title": "Why Adaptive Learning Rates?",
+      "key_message": "Static learning rates fail to balance convergence speed and generalisation.",
+      "layout_type": "title_content",
+      "background_color": null,
+      "footer_override": null,
+      "text_elements": [
+        {
+          "element_id": "s002_title",
+          "role": "title",
+          "content": "Why Adaptive Learning Rates?",
+          "position": { "x": 2.0, "y": 0.5, "w": 29.87, "h": 2.0 },
+          "style": {
+            "font_size": 28,
+            "bold": true,
+            "color": "#1F3864",
+            "align": "left"
+          },
+          "z_index": 0
+        },
+        {
+          "element_id": "s002_body",
+          "role": "body",
+          "content": "• Static learning rates require manual tuning per task\n• Too high → unstable training (loss diverges)\n• Too low → slow convergence and underfitting\n• Adaptive methods automatically adjust the rate per parameter\n• Key challenge: fast convergence vs. good generalisation",
+          "position": { "x": 2.0, "y": 3.2, "w": 29.87, "h": 14.3 },
+          "style": {
+            "font_size": 20,
+            "bold": false,
+            "color": "#000000",
+            "align": "left"
+          },
+          "z_index": 1
+        },
+        {
+          "element_id": "s002_caption",
+          "role": "caption",
+          "content": "Wilson et al. (2017): Adaptive methods may generalise worse than SGD on some tasks.",
+          "position": { "x": 2.0, "y": 16.8, "w": 29.87, "h": 0.9 },
+          "style": {
+            "font_size": 13,
+            "bold": false,
+            "italic": true,
+            "color": "#595959",
+            "align": "left"
+          },
+          "z_index": 2
+        }
+      ],
+      "chart_elements": [],
+      "image_elements": [],
+      "table_elements": [],
+      "speaker_note": "Key message: Static learning rates fail to balance convergence speed and generalisation.\n\nPoints to cover:\n  - Show training curves comparing SGD vs Adam\n  - Emphasize that no single static LR works across all tasks\n  - Transition to our proposed warmup solution",
+      "validation_metadata": {
+        "created_at": "2026-06-04T00:00:00Z",
+        "last_modified": "2026-06-04T00:00:00Z",
+        "schema_version": "1.1",
+        "status": "review",
+        "slide_version": 2,
+        "author": "Jane Researcher",
+        "is_locked": false,
+        "reviewer_flags": ["Check citation format"]
+      }
+    }
+  ]
+}

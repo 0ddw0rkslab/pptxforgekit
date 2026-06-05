@@ -1,0 +1,6 @@
+method,accuracy_pct,f1_score_pct,inference_ms
+Baseline,82.0,79.5,45.2
+Our Method,91.3,88.7,48.1
+Our Method+FT,93.1,91.2,50.3
+Prior Art A,87.5,84.3,52.1
+Prior Art B,88.9,86.0,49.8

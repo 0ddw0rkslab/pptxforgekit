@@ -1,0 +1,191 @@
+{
+  "schema_version": "1.1",
+  "presentation": {
+    "title": "Model Architecture Overview",
+    "presentation_type": "research",
+    "theme_file": "",
+    "total_slides": 3,
+    "generated_at": "2026-06-04T00:00:00Z",
+    "author": "Jane Researcher",
+    "description": "Sample showing image + caption slides with figure labels"
+  },
+  "slides": [
+    {
+      "slide_id": "s001",
+      "slide_number": 1,
+      "section": "cover",
+      "title": "Model Architecture Overview",
+      "key_message": "",
+      "layout_type": "cover",
+      "background_color": null,
+      "footer_override": null,
+      "text_elements": [
+        {
+          "element_id": "s001_title",
+          "role": "title",
+          "content": "Model Architecture Overview",
+          "position": { "x": 2.0, "y": 6.5, "w": 29.87, "h": 4.0 },
+          "style": {
+            "font_size": 36,
+            "bold": true,
+            "color": "#1F3864",
+            "align": "center"
+          },
+          "z_index": 0
+        },
+        {
+          "element_id": "s001_subtitle",
+          "role": "subtitle",
+          "content": "System Design and Component Breakdown",
+          "position": { "x": 2.0, "y": 11.5, "w": 29.87, "h": 2.5 },
+          "style": {
+            "font_size": 20,
+            "color": "#595959",
+            "align": "center"
+          },
+          "z_index": 1
+        }
+      ],
+      "chart_elements": [],
+      "image_elements": [],
+      "table_elements": [],
+      "speaker_note": "This section presents the proposed model architecture with diagrams.",
+      "validation_metadata": {
+        "created_at": "2026-06-04T00:00:00Z",
+        "last_modified": "2026-06-04T00:00:00Z",
+        "schema_version": "1.1",
+        "status": "approved",
+        "slide_version": 1,
+        "author": "Jane Researcher",
+        "is_locked": true,
+        "reviewer_flags": []
+      }
+    },
+    {
+      "slide_id": "s002",
+      "slide_number": 2,
+      "section": "method",
+      "title": "Encoder–Decoder Architecture",
+      "key_message": "The encoder compresses input into a latent representation; the decoder reconstructs the output.",
+      "layout_type": "title_image",
+      "background_color": null,
+      "footer_override": null,
+      "text_elements": [
+        {
+          "element_id": "s002_title",
+          "role": "title",
+          "content": "Encoder–Decoder Architecture",
+          "position": { "x": 2.0, "y": 0.5, "w": 29.87, "h": 2.0 },
+          "style": {
+            "font_size": 28,
+            "bold": true,
+            "color": "#1F3864",
+            "align": "left"
+          },
+          "z_index": 0
+        },
+        {
+          "element_id": "s002_key_msg",
+          "role": "label",
+          "content": "The encoder compresses input into a latent representation; the decoder reconstructs the output.",
+          "position": { "x": 2.0, "y": 16.8, "w": 29.87, "h": 1.0 },
+          "style": {
+            "font_size": 15,
+            "bold": false,
+            "italic": true,
+            "color": "#595959",
+            "align": "center"
+          },
+          "z_index": 2
+        }
+      ],
+      "chart_elements": [],
+      "image_elements": [
+        {
+          "element_id": "s002_arch_image",
+          "file_path": "examples/images/encoder_decoder.png",
+          "caption": "Figure 1. Encoder–Decoder architecture. Input passes through 6 transformer layers before decoding.",
+          "alt_text": "Diagram showing an encoder on the left connected by an arrow to a decoder on the right, with a latent vector z in the middle.",
+          "figure_label": "(A)",
+          "position": { "x": 5.0, "y": 3.0, "w": 23.87, "h": 13.0 },
+          "fit_mode": "fit",
+          "z_index": 1
+        }
+      ],
+      "table_elements": [],
+      "speaker_note": "The encoder maps the input sequence to a fixed-size latent vector z.\nThe decoder attends to z and generates tokens auto-regressively.\nThe dotted connection shows the skip connection used in residual variants.",
+      "validation_metadata": {
+        "created_at": "2026-06-04T00:00:00Z",
+        "last_modified": "2026-06-04T00:00:00Z",
+        "schema_version": "1.1",
+        "status": "draft",
+        "slide_version": 1,
+        "author": "Jane Researcher",
+        "is_locked": false,
+        "reviewer_flags": ["Confirm diagram is high-res (≥300 dpi)"]
+      }
+    },
+    {
+      "slide_id": "s003",
+      "slide_number": 3,
+      "section": "method",
+      "title": "Multi-Head Attention Detail",
+      "key_message": "Each attention head specialises in a different syntactic or semantic relationship.",
+      "layout_type": "two_column",
+      "background_color": null,
+      "footer_override": null,
+      "text_elements": [
+        {
+          "element_id": "s003_title",
+          "role": "title",
+          "content": "Multi-Head Attention Detail",
+          "position": { "x": 2.0, "y": 0.5, "w": 29.87, "h": 2.0 },
+          "style": {
+            "font_size": 28,
+            "bold": true,
+            "color": "#1F3864",
+            "align": "left"
+          },
+          "z_index": 0
+        },
+        {
+          "element_id": "s003_body_left",
+          "role": "body",
+          "content": "• 8 attention heads per layer\n• Each head: Q, K, V projections\n• Scaled dot-product attention\n• Concatenated and projected\n• Dropout 0.1 during training",
+          "position": { "x": 2.0, "y": 3.2, "w": 14.0, "h": 14.3 },
+          "style": {
+            "font_size": 19,
+            "color": "#000000",
+            "align": "left"
+          },
+          "z_index": 1
+        }
+      ],
+      "chart_elements": [],
+      "image_elements": [
+        {
+          "element_id": "s003_attention_image",
+          "file_path": "examples/images/attention_map.png",
+          "caption": "Attention weight heatmap (head 3, layer 4).",
+          "alt_text": "Heatmap showing attention weights between input tokens. Diagonal pattern visible for local context.",
+          "figure_label": "(B)",
+          "position": { "x": 17.87, "y": 3.2, "w": 14.0, "h": 11.0 },
+          "fit_mode": "fit",
+          "z_index": 1
+        }
+      ],
+      "table_elements": [],
+      "speaker_note": "Key message: Each attention head specialises in a different syntactic or semantic relationship.\n\nHeatmap shows head 3 at layer 4 attending primarily to adjacent tokens (local context pattern).",
+      "validation_metadata": {
+        "created_at": "2026-06-04T00:00:00Z",
+        "last_modified": "2026-06-04T00:00:00Z",
+        "schema_version": "1.1",
+        "status": "draft",
+        "slide_version": 1,
+        "author": "Jane Researcher",
+        "is_locked": false,
+        "reviewer_flags": []
+      }
+    }
+  ]
+}

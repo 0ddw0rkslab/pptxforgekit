@@ -1,0 +1,261 @@
+{
+  "schema_version": "1.1",
+  "presentation": {
+    "title": "Chart Gallery — Native PowerPoint Charts",
+    "presentation_type": "research",
+    "theme_file": "",
+    "total_slides": 4,
+    "generated_at": "2026-06-04T00:00:00Z",
+    "description": "Demonstrates all native chart types with inline data"
+  },
+  "slides": [
+    {
+      "slide_id": "s001",
+      "slide_number": 1,
+      "section": "bar",
+      "title": "Accuracy Comparison (Column Chart)",
+      "key_message": "Our method achieves the highest accuracy.",
+      "layout_type": "title_chart",
+      "background_color": null,
+      "footer_override": null,
+      "text_elements": [
+        {
+          "element_id": "s001_title",
+          "role": "title",
+          "content": "Accuracy Comparison (Column Chart)",
+          "position": {"x": 2.0, "y": 0.5, "w": 29.87, "h": 2.0},
+          "style": {"font_size": 28, "bold": true, "color": "#1F3864", "align": "left"},
+          "z_index": 0
+        }
+      ],
+      "chart_elements": [
+        {
+          "element_id": "s001_chart",
+          "chart_type": "bar",
+          "bar_direction": "vertical",
+          "stacked": false,
+          "data_source": "",
+          "x_column": "method",
+          "y_columns": ["accuracy_pct", "f1_score_pct"],
+          "series_names": ["Accuracy (%)", "F1 Score (%)"],
+          "series_colors": ["#1F3864", "#ED7D31"],
+          "title": "Accuracy and F1 Score by Method",
+          "x_label": "Method",
+          "y_label": "Score",
+          "y_unit": "(%)",
+          "value_min": 70.0,
+          "value_max": 100.0,
+          "number_format": "0.0",
+          "legend_position": "bottom",
+          "show_data_labels": true,
+          "data_label_format": "0.0",
+          "position": {"x": 2.5, "y": 3.2, "w": 28.87, "h": 14.3},
+          "data_inline": [
+            {"method": "Baseline",     "accuracy_pct": 82.0, "f1_score_pct": 79.5},
+            {"method": "Prior Art A",  "accuracy_pct": 87.5, "f1_score_pct": 84.3},
+            {"method": "Prior Art B",  "accuracy_pct": 88.9, "f1_score_pct": 86.0},
+            {"method": "Our Method",   "accuracy_pct": 91.3, "f1_score_pct": 88.7},
+            {"method": "Ours + FT",    "accuracy_pct": 93.1, "f1_score_pct": 91.2}
+          ],
+          "z_index": 1
+        }
+      ],
+      "image_elements": [],
+      "table_elements": [],
+      "speaker_note": "Our Method+FT achieves 93.1% accuracy — best in class.",
+      "validation_metadata": {
+        "created_at": "2026-06-04T00:00:00Z",
+        "last_modified": "2026-06-04T00:00:00Z",
+        "schema_version": "1.1",
+        "status": "approved",
+        "slide_version": 1,
+        "author": null,
+        "is_locked": false,
+        "reviewer_flags": []
+      }
+    },
+    {
+      "slide_id": "s002",
+      "slide_number": 2,
+      "section": "line",
+      "title": "Training Curves (Line Chart)",
+      "key_message": "Validation loss decreases steadily with no signs of overfitting.",
+      "layout_type": "title_chart",
+      "background_color": null,
+      "footer_override": null,
+      "text_elements": [
+        {
+          "element_id": "s002_title",
+          "role": "title",
+          "content": "Training Curves (Line Chart)",
+          "position": {"x": 2.0, "y": 0.5, "w": 29.87, "h": 2.0},
+          "style": {"font_size": 28, "bold": true, "color": "#1F3864", "align": "left"},
+          "z_index": 0
+        }
+      ],
+      "chart_elements": [
+        {
+          "element_id": "s002_chart",
+          "chart_type": "line",
+          "stacked": false,
+          "data_source": "",
+          "x_column": "epoch",
+          "y_columns": ["train_loss", "val_loss"],
+          "series_names": ["Train Loss", "Val Loss"],
+          "series_colors": ["#2F75B6", "#ED7D31"],
+          "title": "Loss over Training",
+          "x_label": "Epoch",
+          "y_label": "Loss",
+          "number_format": "0.000",
+          "legend_position": "right",
+          "show_data_labels": false,
+          "position": {"x": 2.5, "y": 3.2, "w": 28.87, "h": 14.3},
+          "data_inline": [
+            {"epoch": 1,  "train_loss": 2.312, "val_loss": 2.305},
+            {"epoch": 5,  "train_loss": 1.823, "val_loss": 1.895},
+            {"epoch": 10, "train_loss": 1.312, "val_loss": 1.445},
+            {"epoch": 20, "train_loss": 0.856, "val_loss": 1.023},
+            {"epoch": 30, "train_loss": 0.612, "val_loss": 0.823},
+            {"epoch": 40, "train_loss": 0.445, "val_loss": 0.712},
+            {"epoch": 50, "train_loss": 0.334, "val_loss": 0.645}
+          ],
+          "z_index": 1
+        }
+      ],
+      "image_elements": [],
+      "table_elements": [],
+      "speaker_note": "Train and val loss track closely — no overfitting observed up to epoch 50.",
+      "validation_metadata": {
+        "created_at": "2026-06-04T00:00:00Z",
+        "last_modified": "2026-06-04T00:00:00Z",
+        "schema_version": "1.1",
+        "status": "draft",
+        "slide_version": 1,
+        "author": null,
+        "is_locked": false,
+        "reviewer_flags": []
+      }
+    },
+    {
+      "slide_id": "s003",
+      "slide_number": 3,
+      "section": "scatter",
+      "title": "Accuracy vs. Model Size (Scatter)",
+      "key_message": "Accuracy scales with model size but inference cost grows super-linearly.",
+      "layout_type": "title_chart",
+      "background_color": null,
+      "footer_override": null,
+      "text_elements": [
+        {
+          "element_id": "s003_title",
+          "role": "title",
+          "content": "Accuracy vs. Model Size (Scatter)",
+          "position": {"x": 2.0, "y": 0.5, "w": 29.87, "h": 2.0},
+          "style": {"font_size": 28, "bold": true, "color": "#1F3864", "align": "left"},
+          "z_index": 0
+        }
+      ],
+      "chart_elements": [
+        {
+          "element_id": "s003_chart",
+          "chart_type": "scatter",
+          "data_source": "",
+          "x_column": "model_params_M",
+          "y_columns": ["accuracy_pct"],
+          "series_names": ["Test Accuracy"],
+          "series_colors": ["#2F75B6"],
+          "title": "Accuracy vs. Parameters",
+          "x_label": "Model Parameters",
+          "x_unit": "(M)",
+          "y_label": "Accuracy",
+          "y_unit": "(%)",
+          "number_format": "0.0",
+          "legend_position": "none",
+          "show_data_labels": false,
+          "position": {"x": 2.5, "y": 3.2, "w": 28.87, "h": 14.3},
+          "data_inline": [
+            {"model_params_M": 0.5,   "accuracy_pct": 72.3},
+            {"model_params_M": 1.2,   "accuracy_pct": 75.8},
+            {"model_params_M": 3.5,   "accuracy_pct": 80.2},
+            {"model_params_M": 7.8,   "accuracy_pct": 84.5},
+            {"model_params_M": 12.3,  "accuracy_pct": 87.1},
+            {"model_params_M": 25.6,  "accuracy_pct": 90.3},
+            {"model_params_M": 67.8,  "accuracy_pct": 92.1},
+            {"model_params_M": 175.4, "accuracy_pct": 93.8}
+          ],
+          "z_index": 1
+        }
+      ],
+      "image_elements": [],
+      "table_elements": [],
+      "speaker_note": "Diminishing returns after 25M parameters — optimal operating point around 12–25M.",
+      "validation_metadata": {
+        "created_at": "2026-06-04T00:00:00Z",
+        "last_modified": "2026-06-04T00:00:00Z",
+        "schema_version": "1.1",
+        "status": "draft",
+        "slide_version": 1,
+        "author": null,
+        "is_locked": false,
+        "reviewer_flags": []
+      }
+    },
+    {
+      "slide_id": "s004",
+      "slide_number": 4,
+      "section": "pie",
+      "title": "Framework Market Share (Pie Chart)",
+      "key_message": "PyTorch dominates with 62% of research framework usage.",
+      "layout_type": "title_chart",
+      "background_color": null,
+      "footer_override": null,
+      "text_elements": [
+        {
+          "element_id": "s004_title",
+          "role": "title",
+          "content": "Framework Market Share (Pie Chart)",
+          "position": {"x": 2.0, "y": 0.5, "w": 29.87, "h": 2.0},
+          "style": {"font_size": 28, "bold": true, "color": "#1F3864", "align": "left"},
+          "z_index": 0
+        }
+      ],
+      "chart_elements": [
+        {
+          "element_id": "s004_chart",
+          "chart_type": "pie",
+          "data_source": "",
+          "x_column": "framework",
+          "y_columns": ["market_share_pct"],
+          "series_names": ["Share"],
+          "series_colors": ["#1F3864", "#2F75B6", "#ED7D31", "#A9D18E"],
+          "title": "ML Framework Usage (2026)",
+          "number_format": "0.0%",
+          "show_data_labels": true,
+          "data_label_format": "0.0%",
+          "legend_position": "right",
+          "position": {"x": 5.0, "y": 3.2, "w": 23.87, "h": 14.3},
+          "data_inline": [
+            {"framework": "PyTorch",     "market_share_pct": 0.623},
+            {"framework": "TensorFlow",  "market_share_pct": 0.281},
+            {"framework": "JAX",         "market_share_pct": 0.054},
+            {"framework": "Others",      "market_share_pct": 0.042}
+          ],
+          "z_index": 1
+        }
+      ],
+      "image_elements": [],
+      "table_elements": [],
+      "speaker_note": "PyTorch adoption in academic papers increased from 48% (2023) to 62% (2026).",
+      "validation_metadata": {
+        "created_at": "2026-06-04T00:00:00Z",
+        "last_modified": "2026-06-04T00:00:00Z",
+        "schema_version": "1.1",
+        "status": "draft",
+        "slide_version": 1,
+        "author": null,
+        "is_locked": false,
+        "reviewer_flags": []
+      }
+    }
+  ]
+}

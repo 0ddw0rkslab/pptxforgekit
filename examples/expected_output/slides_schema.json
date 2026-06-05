@@ -1,0 +1,392 @@
+{
+  "schema_version": "1.1",
+  "presentation": {
+    "title": "Adaptive Learning Rate Methods for Deep Neural Networks",
+    "presentation_type": "research",
+    "theme_file": "../themes/default.yaml",
+    "total_slides": 8,
+    "generated_at": "2026-06-01T00:00:00Z",
+    "author": null,
+    "description": "Expected output for the run_example.sh walkthrough"
+  },
+  "slides": [
+    {
+      "slide_id": "s001",
+      "slide_number": 1,
+      "section": "cover",
+      "title": "Adaptive Learning Rate Methods for Deep Neural Networks",
+      "key_message": "Adam with warmup scheduling outperforms all baseline optimizers.",
+      "layout_type": "cover",
+      "background_color": null,
+      "footer_override": null,
+      "text_elements": [
+        {
+          "element_id": "s001_title",
+          "role": "title",
+          "content": "Adaptive Learning Rate Methods\nfor Deep Neural Networks",
+          "position": {"x": 2.0, "y": 6.5, "w": 29.87, "h": 4.0},
+          "style": {"font_size": 36, "bold": true, "italic": false, "underline": false, "color": "#1F3864", "align": "left"},
+          "z_index": 0
+        },
+        {
+          "element_id": "s001_subtitle",
+          "role": "subtitle",
+          "content": "Adam with warmup scheduling outperforms all baseline optimizers.",
+          "position": {"x": 2.0, "y": 11.5, "w": 29.87, "h": 2.5},
+          "style": {"font_size": 20, "bold": false, "italic": false, "underline": false, "color": "#595959", "align": "left"},
+          "z_index": 0
+        }
+      ],
+      "chart_elements": [],
+      "image_elements": [],
+      "table_elements": [],
+      "speaker_note": "Welcome. This talk covers our comparison of adaptive optimizer methods.",
+      "validation_metadata": {
+        "created_at": "2026-06-01T00:00:00Z",
+        "last_modified": "2026-06-01T00:00:00Z",
+        "schema_version": "1.1",
+        "status": "draft",
+        "slide_version": 1,
+        "author": null,
+        "is_locked": false,
+        "reviewer_flags": []
+      }
+    },
+    {
+      "slide_id": "s002",
+      "slide_number": 2,
+      "section": "agenda",
+      "title": "Agenda",
+      "key_message": "Overview of the presentation structure.",
+      "layout_type": "title_content",
+      "background_color": null,
+      "footer_override": null,
+      "text_elements": [
+        {
+          "element_id": "s002_title",
+          "role": "title",
+          "content": "Agenda",
+          "position": {"x": 2.0, "y": 0.5, "w": 29.87, "h": 2.0},
+          "style": {"font_size": 28, "bold": true, "italic": false, "underline": false, "color": "#1F3864", "align": "left"},
+          "z_index": 0
+        },
+        {
+          "element_id": "s002_body",
+          "role": "body",
+          "content": "• Background & Motivation\n• Methods & Experimental Setup\n• Results\n• Discussion\n• Conclusion",
+          "position": {"x": 2.0, "y": 3.2, "w": 29.87, "h": 14.35},
+          "style": {"font_size": 20, "bold": false, "italic": false, "underline": false, "color": "#000000", "align": "left"},
+          "z_index": 0
+        }
+      ],
+      "chart_elements": [],
+      "image_elements": [],
+      "table_elements": [],
+      "speaker_note": "Walk through the structure quickly.",
+      "validation_metadata": {
+        "created_at": "2026-06-01T00:00:00Z",
+        "last_modified": "2026-06-01T00:00:00Z",
+        "schema_version": "1.1",
+        "status": "draft",
+        "slide_version": 1,
+        "author": null,
+        "is_locked": false,
+        "reviewer_flags": []
+      }
+    },
+    {
+      "slide_id": "s003",
+      "slide_number": 3,
+      "section": "background",
+      "title": "Background & Motivation",
+      "key_message": "Adaptive methods converge faster but may generalize worse than SGD.",
+      "layout_type": "title_content",
+      "background_color": null,
+      "footer_override": null,
+      "text_elements": [
+        {
+          "element_id": "s003_title",
+          "role": "title",
+          "content": "Background & Motivation",
+          "position": {"x": 2.0, "y": 0.5, "w": 29.87, "h": 2.0},
+          "style": {"font_size": 28, "bold": true, "italic": false, "underline": false, "color": "#1F3864", "align": "left"},
+          "z_index": 0
+        },
+        {
+          "element_id": "s003_body",
+          "role": "body",
+          "content": "• Static learning rates cause slow convergence or instability\n• Adam combines momentum with per-parameter adaptive rates\n• AdaGrad adapts using cumulative gradient history\n• RMSProp uses exponentially weighted moving average\n• Prior work: adaptive methods may generalize worse than SGD",
+          "position": {"x": 2.0, "y": 3.2, "w": 29.87, "h": 14.35},
+          "style": {"font_size": 20, "bold": false, "italic": false, "underline": false, "color": "#000000", "align": "left"},
+          "z_index": 0
+        }
+      ],
+      "chart_elements": [],
+      "image_elements": [],
+      "table_elements": [],
+      "speaker_note": "Emphasise the generalization gap problem as the key motivation.",
+      "validation_metadata": {
+        "created_at": "2026-06-01T00:00:00Z",
+        "last_modified": "2026-06-01T00:00:00Z",
+        "schema_version": "1.1",
+        "status": "draft",
+        "slide_version": 1,
+        "author": null,
+        "is_locked": false,
+        "reviewer_flags": []
+      }
+    },
+    {
+      "slide_id": "s004",
+      "slide_number": 4,
+      "section": "method",
+      "title": "Methods",
+      "key_message": "We evaluate 4 optimizers on 3 benchmarks with warmup scheduling.",
+      "layout_type": "two_column",
+      "background_color": null,
+      "footer_override": null,
+      "text_elements": [
+        {
+          "element_id": "s004_title",
+          "role": "title",
+          "content": "Methods",
+          "position": {"x": 2.0, "y": 0.5, "w": 29.87, "h": 2.0},
+          "style": {"font_size": 28, "bold": true, "italic": false, "underline": false, "color": "#1F3864", "align": "left"},
+          "z_index": 0
+        },
+        {
+          "element_id": "s004_body_left",
+          "role": "body",
+          "content": "Benchmarks\n• CIFAR-10 classification\n• Penn Treebank LM\n• WMT14 En-De translation\n• 5 random seeds each",
+          "position": {"x": 2.0, "y": 3.2, "w": 14.0, "h": 14.35},
+          "style": {"font_size": 20, "bold": false, "italic": false, "underline": false, "color": "#000000", "align": "left"},
+          "z_index": 0
+        },
+        {
+          "element_id": "s004_body_right",
+          "role": "body",
+          "content": "Training Setup\n• Linear warmup (1,000 steps)\n• Cosine annealing after warmup\n• Grid search over LR and beta1\n• Same architecture across all runs",
+          "position": {"x": 17.87, "y": 3.2, "w": 14.0, "h": 14.35},
+          "style": {"font_size": 20, "bold": false, "italic": false, "underline": false, "color": "#000000", "align": "left"},
+          "z_index": 0
+        }
+      ],
+      "chart_elements": [],
+      "image_elements": [],
+      "table_elements": [],
+      "speaker_note": "Stress that all hyperparameters were tuned fairly via grid search.",
+      "validation_metadata": {
+        "created_at": "2026-06-01T00:00:00Z",
+        "last_modified": "2026-06-01T00:00:00Z",
+        "schema_version": "1.1",
+        "status": "draft",
+        "slide_version": 1,
+        "author": null,
+        "is_locked": false,
+        "reviewer_flags": []
+      }
+    },
+    {
+      "slide_id": "s005",
+      "slide_number": 5,
+      "section": "results",
+      "title": "Results — CIFAR-10 Accuracy",
+      "key_message": "Adam-Warmup achieves 94.2%, outperforming all baselines.",
+      "layout_type": "title_chart",
+      "background_color": null,
+      "footer_override": null,
+      "text_elements": [
+        {
+          "element_id": "s005_title",
+          "role": "title",
+          "content": "Results — CIFAR-10 Accuracy",
+          "position": {"x": 2.0, "y": 0.5, "w": 29.87, "h": 2.0},
+          "style": {"font_size": 28, "bold": true, "italic": false, "underline": false, "color": "#1F3864", "align": "left"},
+          "z_index": 0
+        }
+      ],
+      "chart_elements": [
+        {
+          "element_id": "s005_chart",
+          "chart_type": "bar",
+          "data_source": "experiment_results.csv",
+          "data_inline": null,
+          "x_column": "method",
+          "y_columns": ["cifar10_accuracy"],
+          "title": "CIFAR-10 Top-1 Accuracy (%)",
+          "x_label": "Optimizer",
+          "y_label": "Accuracy",
+          "y_unit": "(%)",
+          "value_min": 90.0,
+          "value_max": 95.0,
+          "number_format": "0.0",
+          "series_names": ["Accuracy (%)"],
+          "series_colors": ["#2F75B6"],
+          "show_data_labels": true,
+          "data_label_format": "0.0",
+          "stacked": false,
+          "bar_direction": "vertical",
+          "legend_position": "none",
+          "position": {"x": 2.5, "y": 3.2, "w": 28.87, "h": 14.35},
+          "z_index": 0
+        }
+      ],
+      "image_elements": [],
+      "table_elements": [],
+      "speaker_note": "Adam-Warmup: 94.2%. Highlight the gap vs vanilla Adam (93.1%).",
+      "validation_metadata": {
+        "created_at": "2026-06-01T00:00:00Z",
+        "last_modified": "2026-06-01T00:00:00Z",
+        "schema_version": "1.1",
+        "status": "draft",
+        "slide_version": 1,
+        "author": null,
+        "is_locked": false,
+        "reviewer_flags": []
+      }
+    },
+    {
+      "slide_id": "s006",
+      "slide_number": 6,
+      "section": "results",
+      "title": "Results — Training Loss Curves",
+      "key_message": "Warmup eliminates the early instability spike seen in vanilla Adam.",
+      "layout_type": "title_chart",
+      "background_color": null,
+      "footer_override": null,
+      "text_elements": [
+        {
+          "element_id": "s006_title",
+          "role": "title",
+          "content": "Results — Training Loss Curves",
+          "position": {"x": 2.0, "y": 0.5, "w": 29.87, "h": 2.0},
+          "style": {"font_size": 28, "bold": true, "italic": false, "underline": false, "color": "#1F3864", "align": "left"},
+          "z_index": 0
+        }
+      ],
+      "chart_elements": [
+        {
+          "element_id": "s006_chart",
+          "chart_type": "line",
+          "data_source": "measurements.xlsx",
+          "data_inline": null,
+          "x_column": "epoch",
+          "y_columns": ["Adam-Warmup", "Adam", "SGD+Momentum"],
+          "title": "Training Loss by Epoch",
+          "x_label": "Epoch",
+          "y_label": "Loss",
+          "y_unit": "",
+          "value_min": null,
+          "value_max": null,
+          "number_format": "0.00",
+          "series_names": ["Adam-Warmup", "Adam", "SGD+Momentum"],
+          "series_colors": ["#2F75B6", "#ED7D31", "#A9D18E"],
+          "show_data_labels": false,
+          "data_label_format": "",
+          "stacked": false,
+          "bar_direction": "vertical",
+          "legend_position": "right",
+          "position": {"x": 2.5, "y": 3.2, "w": 28.87, "h": 14.35},
+          "z_index": 0
+        }
+      ],
+      "image_elements": [],
+      "table_elements": [],
+      "speaker_note": "Point out the stable early phase for Adam-Warmup — warmup stabilises training.",
+      "validation_metadata": {
+        "created_at": "2026-06-01T00:00:00Z",
+        "last_modified": "2026-06-01T00:00:00Z",
+        "schema_version": "1.1",
+        "status": "draft",
+        "slide_version": 1,
+        "author": null,
+        "is_locked": false,
+        "reviewer_flags": []
+      }
+    },
+    {
+      "slide_id": "s007",
+      "slide_number": 7,
+      "section": "conclusion",
+      "title": "Conclusion",
+      "key_message": "Combining Adam with linear warmup provides consistent improvements across all benchmarks.",
+      "layout_type": "title_content",
+      "background_color": null,
+      "footer_override": null,
+      "text_elements": [
+        {
+          "element_id": "s007_title",
+          "role": "title",
+          "content": "Conclusion",
+          "position": {"x": 2.0, "y": 0.5, "w": 29.87, "h": 2.0},
+          "style": {"font_size": 28, "bold": true, "italic": false, "underline": false, "color": "#1F3864", "align": "left"},
+          "z_index": 0
+        },
+        {
+          "element_id": "s007_body",
+          "role": "body",
+          "content": "• Warmup scheduling reduces early training instability\n• Adam-Warmup improves generalization by up to 8%\n• Computational overhead is negligible\n• Method is robust across architectures and datasets",
+          "position": {"x": 2.0, "y": 3.2, "w": 29.87, "h": 14.35},
+          "style": {"font_size": 20, "bold": false, "italic": false, "underline": false, "color": "#000000", "align": "left"},
+          "z_index": 0
+        }
+      ],
+      "chart_elements": [],
+      "image_elements": [],
+      "table_elements": [],
+      "speaker_note": "Summarise the four key takeaways. Remind audience of the 35% convergence step reduction.",
+      "validation_metadata": {
+        "created_at": "2026-06-01T00:00:00Z",
+        "last_modified": "2026-06-01T00:00:00Z",
+        "schema_version": "1.1",
+        "status": "draft",
+        "slide_version": 1,
+        "author": null,
+        "is_locked": false,
+        "reviewer_flags": []
+      }
+    },
+    {
+      "slide_id": "s008",
+      "slide_number": 8,
+      "section": "qa",
+      "title": "Thank You & Q&A",
+      "key_message": "",
+      "layout_type": "cover",
+      "background_color": null,
+      "footer_override": null,
+      "text_elements": [
+        {
+          "element_id": "s008_title",
+          "role": "title",
+          "content": "Thank You",
+          "position": {"x": 2.0, "y": 6.5, "w": 29.87, "h": 4.0},
+          "style": {"font_size": 36, "bold": true, "italic": false, "underline": false, "color": "#1F3864", "align": "left"},
+          "z_index": 0
+        },
+        {
+          "element_id": "s008_subtitle",
+          "role": "subtitle",
+          "content": "Code and data: github.com/example/adaptive-lr",
+          "position": {"x": 2.0, "y": 11.5, "w": 29.87, "h": 2.5},
+          "style": {"font_size": 20, "bold": false, "italic": false, "underline": false, "color": "#595959", "align": "left"},
+          "z_index": 0
+        }
+      ],
+      "chart_elements": [],
+      "image_elements": [],
+      "table_elements": [],
+      "speaker_note": "Open floor for questions.",
+      "validation_metadata": {
+        "created_at": "2026-06-01T00:00:00Z",
+        "last_modified": "2026-06-01T00:00:00Z",
+        "schema_version": "1.1",
+        "status": "draft",
+        "slide_version": 1,
+        "author": null,
+        "is_locked": false,
+        "reviewer_flags": []
+      }
+    }
+  ]
+}

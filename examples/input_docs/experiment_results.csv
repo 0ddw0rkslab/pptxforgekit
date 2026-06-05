@@ -1,0 +1,6 @@
+method,cifar10_accuracy,ptb_perplexity,convergence_steps,training_time_min
+Adam-Warmup,94.2,58.3,12000,142
+Adam,93.1,61.2,18500,138
+SGD+Momentum,93.8,59.7,22000,135
+RMSProp,92.4,63.5,21000,141
+AdaGrad,91.7,67.1,25000,140

@@ -1,0 +1,61 @@
+name: academic
+
+# Academic theme: deep navy primary, clean white background, Georgia serif fonts.
+# Designed for conference presentations and research talks.
+
+colors:
+  primary:    "#0D2B5E"   # deep navy — headings, title text
+  secondary:  "#1A5276"   # medium navy — secondary accents
+  accent:     "#C0392B"   # crimson — highlights, emphasis
+  background: "#FAFAFA"   # off-white — easier on the eyes than pure white
+  text:       "#1A1A1A"   # near-black body text
+  text_light: "#6C6C6C"   # grey — captions, footer
+
+fonts:
+  title_font:   Georgia     # serif title for a scholarly look
+  body_font:    Calibri     # clean sans-serif body (widely available)
+  title_size:   34
+  heading_size: 26
+  body_size:    19
+  caption_size: 13
+  min_size:     11
+
+margins:
+  top:    1.8
+  bottom: 1.8
+  left:   2.2
+  right:  2.2
+
+title_position:
+  x: 2.2
+  y: 0.5
+  w: 29.47
+  h: 2.0
+
+footer:
+  show_page_number: true
+  show_date:        false
+  custom_text:      ""
+
+chart_style:
+  preferred_type: bar
+  color_sequence:
+    - "#1A5276"   # navy
+    - "#C0392B"   # crimson
+    - "#1E8449"   # forest green
+    - "#7D3C98"   # purple
+    - "#B7950B"   # dark gold
+  show_legend:      true
+  show_data_labels: true
+  label_style:      outside_end
+
+rules:
+  - rule_type: max_bullets
+    value: 5
+    description: "Academic slides should be concise — max 5 bullet points"
+  - rule_type: min_font_size
+    value: 11
+    description: "Minimum readable font size for conference projection"
+  - rule_type: max_text_chars
+    value: 350
+    description: "Keep body text concise for academic audiences"
