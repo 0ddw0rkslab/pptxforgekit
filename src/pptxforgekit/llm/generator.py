@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import logging
+from collections import defaultdict
 from datetime import UTC, datetime
 from typing import Any, cast
 
@@ -21,7 +22,7 @@ from pptxforgekit.models.schema import (
     ValidationMetadata,
 )
 from pptxforgekit.models.theme import ThemeConfig
-from pptxforgekit.renderer.layout_engine import get_position
+from pptxforgekit.renderer.layout_engine import get_position, get_positions
 
 logger = logging.getLogger(__name__)
 
@@ -172,37 +173,52 @@ class LLMSchemaGenerator(ISlideSchemaGenerator):
             ))
 
         # ── text blocks ───────────────────────────────────────────────────────
+        # Group by layout slot so multiple blocks with the same role are merged
+        # into one TextElement rather than stacked on top of each other.
         role_slot_map = {
-            "subtitle": "subtitle",
-            "body": "body",
-            "body_left": "body_left",
+            "subtitle":   "subtitle",
+            "body":       "body",
+            "body_left":  "body_left",
             "body_right": "body_right",
-            "caption": "body",
+            "caption":    "body",
         }
+        # Only allow text slots that actually exist in the current layout
+        # (prevents body text overlapping chart/table/image areas via fallback)
+        layout_slots = set(get_positions(layout).keys())
+        # "title" is already handled above; remaining text-eligible slots:
+        text_eligible_slots = layout_slots - {"title", "chart", "table", "image"}
+
+        slot_contents: defaultdict[str, list[str]] = defaultdict(list)
         for block in llm_slide.text_blocks:
-            role = block.role
             if not block.content.strip():
                 continue
-            slot = role_slot_map.get(role, "body")
-            # Skip if layout doesn't support this slot
+            slot = role_slot_map.get(block.role, "body")
+            if slot not in text_eligible_slots:
+                continue  # skip: this slot is not a text area for this layout
+            slot_contents[slot].append(block.content)
+
+        for slot, contents in slot_contents.items():
             try:
                 pos = get_position(layout, slot)
             except Exception:
                 pos = get_position("title_content", "body")
 
             elem_counter += 1
-            is_title_role = role in ("title", "subtitle")
+            is_subtitle = slot == "subtitle"
+            merged = "\n".join(contents)
+            valid_roles = ("title", "subtitle", "body", "caption", "footer", "label")
+            elem_role = slot if slot in valid_roles else "body"
             text_elements.append(TextElement(
                 element_id=f"{outline_slide.slide_id}_t{elem_counter:02d}",
-                role=role if role in ("title", "subtitle", "body", "caption", "footer", "label") else "body",  # type: ignore[arg-type]
-                content=block.content,
+                role=elem_role,  # type: ignore[arg-type]
+                content=merged,
                 position=pos,
                 style=TextStyle(
                     font_size=(
-                        theme.fonts.heading_size if is_title_role
+                        theme.fonts.heading_size if is_subtitle
                         else theme.fonts.body_size
                     ),
-                    color=theme.colors.primary if is_title_role else theme.colors.text,
+                    color=theme.colors.primary if is_subtitle else theme.colors.text,
                 ),
             ))
 

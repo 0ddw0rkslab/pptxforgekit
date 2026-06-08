@@ -128,9 +128,13 @@ class PPTXRenderer:
 
         style = elem.style
         lines = elem.content.splitlines()
-        for i, line in enumerate(lines):
-            para = tf.paragraphs[0] if i == 0 else tf.add_paragraph()
-            # Clear any auto-added text from para.text assignment
+        first_para = True
+        for line in lines:
+            if first_para:
+                para = tf.paragraphs[0]
+                first_para = False
+            else:
+                para = tf.add_paragraph()
             para.clear()
             run = para.add_run()
             run.text = line
@@ -240,8 +244,9 @@ class PPTXRenderer:
 
         for j, header in enumerate(elem.headers):
             cell = tbl.cell(0, j)
-            cell.text = str(header)
-            run = cell.text_frame.paragraphs[0].add_run()
+            para = cell.text_frame.paragraphs[0]
+            para.clear()
+            run = para.add_run()
             run.text = str(header)
             run.font.bold = True
             run.font.color.rgb = header_fg
@@ -252,7 +257,9 @@ class PPTXRenderer:
         for i, row_data in enumerate(elem.rows):
             for j in range(min(len(row_data), n_cols)):
                 cell = tbl.cell(i + 1, j)
-                run = cell.text_frame.paragraphs[0].add_run()
+                para = cell.text_frame.paragraphs[0]
+                para.clear()
+                run = para.add_run()
                 run.text = str(row_data[j])
                 run.font.size = Pt(self._theme.fonts.body_size - 4)
 

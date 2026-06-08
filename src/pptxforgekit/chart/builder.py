@@ -250,21 +250,42 @@ class ChartBuilder:
     def _apply_colors(
         self, chart: Any, element: ChartElement, theme: ThemeConfig
     ) -> None:
-        # series_colors overrides theme; fall back to theme for unspecified series
         per_series = list(element.series_colors)
         theme_colors = list(theme.chart_style.color_sequence)
 
         try:
-            for i, series in enumerate(chart.series):
-                if i < len(per_series) and per_series[i]:
-                    color = per_series[i]
-                elif i < len(theme_colors):
-                    color = theme_colors[i]
-                else:
-                    continue
-                fill = series.format.fill
-                fill.solid()
-                fill.fore_color.rgb = _rgb(color)
+            if element.chart_type == "pie":
+                # Pie: one series, color each point (slice) from the theme palette
+                series = chart.series[0]
+                for j, point in enumerate(series.points):
+                    if j < len(per_series) and per_series[j]:
+                        color = per_series[j]
+                    elif j < len(theme_colors):
+                        color = theme_colors[j]
+                    else:
+                        continue
+                    point.format.fill.solid()
+                    point.format.fill.fore_color.rgb = _rgb(color)
+            else:
+                for i, series in enumerate(chart.series):
+                    if i < len(per_series) and per_series[i]:
+                        color = per_series[i]
+                    elif i < len(theme_colors):
+                        color = theme_colors[i]
+                    else:
+                        continue
+                    if element.chart_type in ("line", "scatter"):
+                        # Line/scatter: color the stroke; also tint the marker fill
+                        series.format.line.color.rgb = _rgb(color)
+                        try:
+                            series.marker.format.fill.solid()
+                            series.marker.format.fill.fore_color.rgb = _rgb(color)
+                        except Exception:
+                            pass
+                    else:
+                        # Bar/column: color the series fill
+                        series.format.fill.solid()
+                        series.format.fill.fore_color.rgb = _rgb(color)
         except Exception as exc:
             logger.debug("Could not apply series colors: %s", exc)
 
