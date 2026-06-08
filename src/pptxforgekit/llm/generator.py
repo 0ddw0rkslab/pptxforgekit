@@ -173,8 +173,8 @@ class LLMSchemaGenerator(ISlideSchemaGenerator):
             ))
 
         # ── text blocks ───────────────────────────────────────────────────────
-        # Group by layout slot so multiple blocks with the same role are merged
-        # into one TextElement rather than stacked on top of each other.
+        # Map LLM-provided roles to layout slot names, then distribute content
+        # so each slot has exactly one TextElement.
         role_slot_map = {
             "subtitle":   "subtitle",
             "body":       "body",
@@ -182,20 +182,31 @@ class LLMSchemaGenerator(ISlideSchemaGenerator):
             "body_right": "body_right",
             "caption":    "body",
         }
-        # Only allow text slots that actually exist in the current layout
-        # (prevents body text overlapping chart/table/image areas via fallback)
         layout_slots = set(get_positions(layout).keys())
-        # "title" is already handled above; remaining text-eligible slots:
+        # Text-eligible: slots defined in the layout, excluding non-text area slots
         text_eligible_slots = layout_slots - {"title", "chart", "table", "image"}
+        is_two_col = "body_left" in layout_slots and "body_right" in layout_slots
 
         slot_contents: defaultdict[str, list[str]] = defaultdict(list)
+        body_overflow: list[str] = []  # generic "body" blocks collected for promotion
+
         for block in llm_slide.text_blocks:
             if not block.content.strip():
                 continue
             slot = role_slot_map.get(block.role, "body")
-            if slot not in text_eligible_slots:
-                continue  # skip: this slot is not a text area for this layout
-            slot_contents[slot].append(block.content)
+            if slot in text_eligible_slots:
+                slot_contents[slot].append(block.content)
+            elif slot == "body" and is_two_col:
+                # two_column layout has no plain "body" slot; queue for promotion
+                body_overflow.append(block.content)
+            # else: slot doesn't fit this layout (e.g. body on title_chart) → drop
+
+        # Promote overflow body blocks into body_left / body_right
+        if is_two_col and body_overflow:
+            if body_overflow:
+                slot_contents["body_left"].append(body_overflow[0])
+            if len(body_overflow) > 1:
+                slot_contents["body_right"].extend(body_overflow[1:])
 
         for slot, contents in slot_contents.items():
             try:

@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import logging
+from collections import defaultdict
 from pathlib import Path
 
 from pptx import Presentation
@@ -20,6 +21,7 @@ from pptxforgekit.models.schema import (
     TextStyle,
 )
 from pptxforgekit.models.theme import ThemeConfig
+from pptxforgekit.renderer.layout_engine import get_positions
 
 logger = logging.getLogger(__name__)
 
@@ -84,9 +86,60 @@ class PPTXRenderer:
         prs.slide_height = Cm(_SLIDE_HEIGHT_CM)
         return prs
 
+    def _normalize_overlaps(self, schema: SlideSchema) -> SlideSchema:
+        """Redistribute overlapping text elements before rendering.
+
+        When multiple non-title text elements share the same position (a common
+        LLM generation artefact), they are either redistributed into the
+        layout's column slots (two_column) or merged into a single element.
+        Title elements are always passed through unchanged.
+        """
+        pos_groups: defaultdict[tuple[float, float, float, float], list[TextElement]] = defaultdict(list)
+        title_elems: list[TextElement] = []
+
+        for elem in schema.text_elements:
+            if elem.role == "title":
+                title_elems.append(elem)
+                continue
+            p = elem.position
+            key = (round(p.x, 1), round(p.y, 1), round(p.w, 1), round(p.h, 1))
+            pos_groups[key].append(elem)
+
+        # Fast path: no overlaps
+        if all(len(g) == 1 for g in pos_groups.values()):
+            return schema
+
+        layout_pos = get_positions(schema.layout_type)
+        new_elems: list[TextElement] = list(title_elems)
+
+        for elems in pos_groups.values():
+            if len(elems) == 1:
+                new_elems.append(elems[0])
+            elif "body_left" in layout_pos and "body_right" in layout_pos:
+                # two_column: first block → left column, remaining → right column
+                new_elems.append(elems[0].model_copy(
+                    update={"position": layout_pos["body_left"]}
+                ))
+                right_content = "\n".join(e.content for e in elems[1:])
+                new_elems.append(elems[1].model_copy(
+                    update={"content": right_content, "position": layout_pos["body_right"]}
+                ))
+            else:
+                # Other layouts: merge all content into the first element
+                merged = "\n".join(e.content for e in elems)
+                new_elems.append(elems[0].model_copy(update={"content": merged}))
+
+        logger.debug(
+            "Slide %s: normalized %d overlapping text elements",
+            schema.slide_id,
+            sum(len(g) for g in pos_groups.values() if len(g) > 1),
+        )
+        return schema.model_copy(update={"text_elements": new_elems})
+
     def _render_slide(
         self, slide: object, schema: SlideSchema, base_path: Path
     ) -> None:
+        schema = self._normalize_overlaps(schema)
         bg = schema.background_color or self._theme.colors.background
         self._set_background(slide, bg)
 
